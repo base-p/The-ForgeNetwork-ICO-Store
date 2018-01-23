@@ -1,0 +1,1 @@
+/var/www/private/forgenet-shop/config.php
