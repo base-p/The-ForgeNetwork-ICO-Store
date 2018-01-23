@@ -66,7 +66,7 @@
     }
     
     public static function getBarCodeUrl($username, $domain, $secretkey, $issuer) {
-      $url = "http://chart.apis.google.com/chart";
+      $url = "https://chart.apis.google.com/chart";
       $url = $url."?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/";
       $url = $url.$username . "@" . $domain . "%3Fsecret%3D" . $secretkey . '%26issuer%3D' . rawurlencode($issuer);
       
