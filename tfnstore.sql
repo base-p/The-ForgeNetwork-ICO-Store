@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2018 at 08:00 AM
+-- Generation Time: Jan 23, 2018 at 01:06 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -64,6 +64,8 @@ CREATE TABLE `transactions` (
   `txn_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `confirms` int(11) NOT NULL,
   `status` int(11) NOT NULL,
+  `email_confirmed` int(1) NOT NULL,
+  `reset_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -72,10 +74,10 @@ CREATE TABLE `transactions` (
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`id`, `user_id`, `wallet_id`, `amount`, `conversion_rate`, `frg_amount`, `txn_id`, `confirms`, `status`, `created`, `modified`) VALUES
-(3, 13, 4, 2.52, 11966.4, 60310.656, 'mytxid', 1, 1, '2018-01-23 00:14:30', '2018-01-23 00:14:30'),
-(4, 13, 5, 2.52, 0.00757872, 0.0381967488, 'mytxidKJ', 2, 100, '2018-01-23 00:20:22', '2018-01-23 00:20:22'),
-(5, 13, 6, 20.525, 1095.513030576, 44970.81, 'mytxidfddKJ', 2, 2, '2018-01-23 00:28:57', '2018-01-23 00:28:57');
+INSERT INTO `transactions` (`id`, `user_id`, `wallet_id`, `amount`, `conversion_rate`, `frg_amount`, `txn_id`, `confirms`, `status`, `email_confirmed`, `reset_password`, `created`, `modified`) VALUES
+(3, 13, 4, 2.52, 11966.4, 60310.656, 'mytxid', 1, 1, 0, NULL, '2018-01-23 00:14:30', '2018-01-23 00:14:30'),
+(4, 13, 5, 2.52, 0.00757872, 0.0381967488, 'mytxidKJ', 2, 100, 0, NULL, '2018-01-23 00:20:22', '2018-01-23 00:20:22'),
+(5, 13, 6, 20.525, 1095.513030576, 44970.81, 'mytxidfddKJ', 2, 2, 0, NULL, '2018-01-23 00:28:57', '2018-01-23 00:28:57');
 
 -- --------------------------------------------------------
 

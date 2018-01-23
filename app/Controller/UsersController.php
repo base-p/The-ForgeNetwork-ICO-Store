@@ -479,7 +479,7 @@ class UsersController extends AppController {
         $cps = new CoinPaymentsAPI();
         $cps->Setup(CP_SECRET, CP_PUB);
 
-        $ipn_url = 'https://store.theforgenetwork.com/ipn_handler';
+        $ipn_url = 'https://shop.theforgenetwork.com/ipn_handler';
        
         $result = $cps->GetCallbackAddress($currency,$ipn_url);
         
@@ -500,7 +500,7 @@ class UsersController extends AppController {
           $this->autoRender = false;
         $cp_merchant_id = MERCHANT_ID;
         $cp_ipn_secret = IPN_SECRET;
-        $cp_debug_email = 'okorieobumneke@gmail.com';
+        $cp_debug_email = 'info@theforgenetwork.com';
 
         
 
