@@ -101,6 +101,7 @@ class UsersController extends AppController {
     public function dashboard_transactions() {
 		$user_id = $this->Auth->User('id'); 
          $txns = $this->Transaction->find('all',array('conditions'=>array('Transaction.user_id'=>$user_id)));
+        if(!empty($txns)){
         $earned=0;
         foreach ($txns as $key=>$txn){
             $earned += $txn['Transaction']['frg_amount'];
@@ -116,7 +117,7 @@ class UsersController extends AppController {
             }
         }
         
-        
+        }
         
         $this->set(compact('txns','earned'));
         
