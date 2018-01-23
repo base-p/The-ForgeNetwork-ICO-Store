@@ -1,0 +1,199 @@
+/**
+ * Generic text / layout settings
+ */
+
+@font-face {
+    font-family: 'helvetica-neue';
+    src: url('../fonts/helveticaneue-webfont.eot');
+    src: local('Helvetica Neue'),
+    url('../fonts/helveticaneue-webfont.eot') format('embedded-opentype'),
+    url('../fonts/helveticaneue-webfont.woff') format('woff'),
+    url('../fonts/helveticaneue-webfont.ttf') format('truetype'),
+    url('../fonts/helveticaneue-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'helvetican-neue-light';
+    src: url('../fonts/helveticaneue-light-webfont.eot');
+    src: local('Helvetica Neue Light'),
+    url('../fonts/helveticaneue-light-webfont.eot') format('embedded-opentype'),
+    url('../fonts/helveticaneue-light-webfont.woff') format('woff'),
+    url('../fonts/helveticaneue-light-webfont.ttf') format('truetype'),
+    url('../fonts/helveticaneue-light-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'fjalla-one-regular';
+    src: url('../fonts/Fjalla-One-regular.eot');
+    src: local('Fjalla One'),
+    url('../fonts/Fjalla-One-regular.eot') format('embedded-opentype'),
+    url('../fonts/Fjalla-One-regular.woff') format('woff'),
+    url('../fonts/Fjalla-One-regular.ttf') format('truetype'),
+    url('../fonts/Fjalla-One-regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    box-sizing: border-box;
+    line-height: 1.7;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+html,
+input,
+textarea,
+select,
+button {
+    font-family: 'helvetican-neue-light', 'Helvetica', 'Open Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+input, textarea {
+    padding: 0.5em;
+}
+
+input[type='text'], input[type='password'], input[type='email'] {
+    width: 100%;
+}
+
+button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'fjalla-one-regular', sans-serif;
+    font-weight: normal;
+}
+
+p, pre, ul, ol, blockquote, dl {
+    margin: 0 0 1.5em;
+}
+
+a {
+    text-decoration: underline;
+    color: #ff0006;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+}
+
+th, td, caption {
+    text-align: left;
+}
+
+tfoot td {
+    padding-top: 1em;
+}
+
+tfoot ol {
+    float: left;
+}
+
+tfoot p {
+    float: right;
+}
+
+code {
+    display: inline-block;
+    padding: 0 .25em;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .25);
+}
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

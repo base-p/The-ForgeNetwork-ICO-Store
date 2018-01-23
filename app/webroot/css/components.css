@@ -1,0 +1,378 @@
+/**
+ * Masthead
+ */
+
+.c-mastHead {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    min-height: 70vh;
+    color: #fff;
+    background: #000 url(../img/masthead.jpg) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.c-mastHead__identity {
+    position: absolute;
+    width: 80%;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+}
+
+.c-mastHead__login {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.c-mastHead__actions {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}
+
+@media (min-width: 860px) {
+    .c-mastHead__actions {
+        position: absolute;
+        width: 80%;
+        bottom: 50px;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        text-align: center;
+    }
+
+    .c-mastHead__identity {
+        transform: translate(-50%, -40%);
+    }
+}
+
+/**
+ * Identity
+ */
+
+.c-identity {
+    text-align: center;
+}
+
+.c-identity__logo {
+    margin: 0 auto;
+}
+
+.c-identity__title {
+    margin: .75em 0 0;
+    font-size: 2.2em;
+    line-height: 1;
+}
+
+.c-identity__subtitle {
+    font-size: 1.3em;
+}
+
+@media (min-width: 950px) {
+    .c-identity__title {
+        font-size: 3em;
+    }
+
+    .c-identity__subtitle {
+        font-size: 1.5em;
+    }
+}
+
+/**
+ * Join conversation
+ */
+
+.c-joinConversation__list,
+.c-joinConversation__list li {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.c-joinConversation__label {
+    margin-bottom: 0.25em;
+}
+
+.c-siteNav__panel .c-joinConversation {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 3em;
+    text-align: center;
+    color: #fff;
+}
+
+.c-siteNav__panel .c-joinConversation__label {
+    margin-bottom: 0.5em;
+}
+
+@media (min-width: 800px) {
+    .c-joinConversation__label {
+        display: inline-block;
+        margin: 0;
+    }
+}
+
+/**
+ * Social media links
+ */
+
+.c-socialMediaLink {
+    display: block;
+    text-indent: -999em;
+    width: 24px;
+    height: 24px;
+    background: transparent no-repeat 0 0;
+    background-size: 24px;
+}
+
+.c-socialMediaLink--telegram {
+    background-image: url(../img/icon-telegram.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--telegram {
+    background-image: url(../img/icon-telegram-white.svg);
+}
+
+.c-socialMediaLink--discord {
+    background-image: url(../img/icon-discord.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--discord {
+    background-image: url(../img/icon-discord-white.svg);
+}
+
+.c-socialMediaLink--facebook {
+    background-image: url(../img/icon-facebook.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--facebook {
+    background-image: url(../img/icon-facebook-white.svg);
+}
+
+.c-socialMediaLink--instagram {
+    background-image: url(../img/icon-instagram.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--instagram {
+    background-image: url(../img/icon-instagram-white.svg);
+}
+
+.c-socialMediaLink--linkedin {
+    background-image: url(../img/icon-linkedin.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--linkedin {
+    background-image: url(../img/icon-linkedin-white.svg);
+}
+
+.c-socialMediaLink--reddit {
+    background-image: url(../img/icon-reddit.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--reddit {
+    background-image: url(../img/icon-reddit-white.svg);
+}
+
+.c-socialMediaLink--twitter {
+    background-image: url(../img/icon-twitter.svg);
+}
+
+.c-socialMediaLink--white.c-socialMediaLink--twitter {
+    background-image: url(../img/icon-twitter-white.svg);
+}
+
+/**
+ * Countdown
+ */
+
+@media (min-width: 800px) {
+    .c-countDown {
+        max-width: 730px;
+        margin: 0 auto;
+    }
+}
+
+.c-countDown__list {
+    display: flex;
+}
+
+.c-countDown__list li {
+    width: 25%;
+}
+
+.c-countDown__value,
+.c-countDown__label {
+    display: block;
+}
+
+.c-countDown__value {
+    font-size: 3em;
+}
+
+/**
+ * Buttons
+ */
+
+.c-button {
+    display: inline-block;
+    padding: .6em 1.75em;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ff0006;
+    color: #ff0006;
+    background: transparent;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.c-button:hover {
+    background: #ff0006;
+    color: #fff;
+}
+
+.c-button--white {
+    color: #fff;
+    border-color: #fff;
+}
+
+.c-button--white:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+/**
+ * Minimal logo
+ */
+
+.c-minimalLogo {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    line-height: 50px;
+}
+
+.c-siteNav__panel .c-minimalLogo {
+    color: #000;
+}
+
+.c-minimalLogo__avatar {
+    display: inline-block;
+    transform: translateY(3px);
+}
+
+/**
+ * Page title / section title
+ */
+
+.c-pageTitle,
+.c-sectionTitle {
+    text-align: center;
+}
+
+.c-pageTitle__subtitle,
+.c-sectionTitle__subtitle {
+    display: block;
+    font-size: .7em;
+    font-family: 'helvetican-neue-light', 'Helvetica', 'Open Sans', Arial, sans-serif;
+}
+
+/**
+ * Forms
+ */
+
+.c-form__label {
+    display: block;
+    width: 100%;
+    font-style: italic;
+}
+
+.c-form__subtitle {
+    display: block;
+    margin-bottom: .25em;
+    color: #666;
+}
+
+/**
+ * Page introduction
+ */
+
+.c-pageIntroduction {
+    max-width: 650px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 2em;
+    font-size: 1.25em;
+    text-align: center;
+}
+
+/**
+ * Dashboard menu
+ */
+
+.c-menu {
+    margin: 0 0 4em;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.c-menu li,
+.c-menu li a {
+    display: inline-block;
+}
+
+.c-menu li a {
+    padding: 0 1em;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    transition: all .2s;
+}
+
+.c-menu li:hover a,
+.c-menu .c-menu--active a {
+    background-color: #fff;
+    color: #000;
+}
+
+/**
+ * Pager
+ */
+
+.c-pager {
+    float: left;
+}
+
+.c-pager__page {
+    display: inline-block;
+}
+
+.c-pager__page a {
+    display: inline-block;
+    padding: 0 .75em;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.c-pager__active {
+    background: #fff;
+    color: #000;
+}
+
+/**
+ * Notices
+ */
+
+.c-notice {
+    padding: 1.5em;
+    border: 1px solid #ccc;
+}
+
+.error{
+    color: red;
+}
