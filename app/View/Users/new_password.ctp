@@ -1,0 +1,46 @@
+<body class='login'>
+        <section class='l-row l-row--menu p-menu'>
+    <div class='l-row__inner'>
+        <a href='home.html' class='c-minimalLogo'>
+            <?php echo $this->Html->image('favicon.png',['class'=>'c-minimalLogo__avatar','width'=>'18','height'=>'18','alt'=>'']); ?>
+    <span class='c-minimalLogo__company u-fontHeadings'>ForgeNet</span>
+    <span class='c-minimalLogo__tagLine'>ICO Shop</span>
+</a>    </div>
+</section>        <div class='contentContainer'>
+                <section class='l-row'>
+        <div class='l-row__inner'>
+            <h1 class='c-pageTitle'>
+    Set a new password
+    </h1>            <div class='l-cols l-cols--2'>
+                <div class='l-col'>
+                    <form class='c-form' action='login.html'>
+                        <p class='c-form__row'>
+                            <span class='c-form__label'>E-mail address</span>
+                            <span class='c-form__field'>foo@bar.nl</span>
+                        </p>
+                        <p class='c-form__row'>
+                            <label for='password' class='c-form__label'>Password</label>
+                            <input required id='password' type='password' class='c-form__field' />
+                        </p>
+                        <p class='c-form__row'>
+                            <label for='passwordConfirm' class='c-form__label'>Password (confirmation)</label>
+                            <input required id='passwordConfirm' type='password' class='c-form__field' />
+                        </p>
+                        <p class='c-form__row'>
+                            <button type='submit'>Save password</button>
+                        </p>
+                    </form>
+                </div>
+                <div class='l-col'>
+                    <p>
+                        Need help reactivating your account? Please contact us at one of our social media channels.
+                        We'll be there to help you out. You'll be up and running in notime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+        </div>
+         <?php echo $this->element('footer');?>
+             <?php echo $this->Html->script('countDown');?>
+    </body>

@@ -37,7 +37,7 @@
 	Router::connect('/ipn_handler', array('controller' => 'users', 'action' => 'ipn_handler'));
 	Router::connect('/get_rates', array('controller' => 'users', 'action' => 'get_rates'));
 	Router::connect('/get_usdrate', array('controller' => 'users', 'action' => 'get_usdrate'));
-	Router::connect('/new_password/**', array('controller' => 'users', 'action' => 'new_password'));
+	
 	//Router::connect('/generate_address/**', array('controller' => 'users', 'action' => 'generate_address'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

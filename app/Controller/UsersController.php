@@ -370,7 +370,7 @@ class UsersController extends AppController {
         return false;
     }
 } 
-    protected function sendMail($recipient,$subject,$message){ 
+    protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name='No Name'){ 
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $mgClient = new Mailgun\Mailgun(MG_SECRET);
@@ -379,7 +379,7 @@ class UsersController extends AppController {
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
             'from'    => 'ForgeNetwork <postmaster@ico.theforgenetwork.com>',
-            'to'      => 'Obumneke <'.$recipient.'>',
+            'to'      => $name.' <'.$recipient.'>',
             'subject' => $subject,
             'text'    => $message
         ));
@@ -643,4 +643,9 @@ class UsersController extends AppController {
         die('IPN OK'); 
 
         }
+    
+    public function new_password($user_id=NULL, $r_key=NULL) {
+        
+        $this->set(compact('user_id','r_key'));
+	}
 }
