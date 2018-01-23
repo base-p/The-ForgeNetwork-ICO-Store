@@ -123,10 +123,10 @@
                 </div>
             </div>
             <p class='u-alignCenter'>
-                <a class='c-button c-button--red' href='login.html'>
+                <a class='c-button c-button--red' href='login'>
     Login
 </a>                or
-                <a class='c-button c-button--red' href='register.html'>
+                <a class='c-button c-button--red' href='register'>
     Register
 </a>            </p>
         </div>

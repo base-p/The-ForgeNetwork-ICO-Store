@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2018 at 01:06 PM
+-- Generation Time: Jan 23, 2018 at 08:55 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -64,8 +64,6 @@ CREATE TABLE `transactions` (
   `txn_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `confirms` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `email_confirmed` int(1) NOT NULL,
-  `reset_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -74,10 +72,10 @@ CREATE TABLE `transactions` (
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`id`, `user_id`, `wallet_id`, `amount`, `conversion_rate`, `frg_amount`, `txn_id`, `confirms`, `status`, `email_confirmed`, `reset_password`, `created`, `modified`) VALUES
-(3, 13, 4, 2.52, 11966.4, 60310.656, 'mytxid', 1, 1, 0, NULL, '2018-01-23 00:14:30', '2018-01-23 00:14:30'),
-(4, 13, 5, 2.52, 0.00757872, 0.0381967488, 'mytxidKJ', 2, 100, 0, NULL, '2018-01-23 00:20:22', '2018-01-23 00:20:22'),
-(5, 13, 6, 20.525, 1095.513030576, 44970.81, 'mytxidfddKJ', 2, 2, 0, NULL, '2018-01-23 00:28:57', '2018-01-23 00:28:57');
+INSERT INTO `transactions` (`id`, `user_id`, `wallet_id`, `amount`, `conversion_rate`, `frg_amount`, `txn_id`, `confirms`, `status`, `created`, `modified`) VALUES
+(3, 13, 4, 2.52, 11966.4, 60310.656, 'mytxid', 1, 1, '2018-01-23 00:14:30', '2018-01-23 00:14:30'),
+(4, 13, 5, 2.52, 0.00757872, 0.0381967488, 'mytxidKJ', 2, 100, '2018-01-23 00:20:22', '2018-01-23 00:20:22'),
+(5, 13, 6, 20.525, 1095.513030576, 44970.81, 'mytxidfddKJ', 2, 2, '2018-01-23 00:28:57', '2018-01-23 00:28:57');
 
 -- --------------------------------------------------------
 
@@ -97,6 +95,8 @@ CREATE TABLE `users` (
   `ref_id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `referrer` int(11) DEFAULT NULL,
   `frg_wallet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_confirmed` int(1) NOT NULL,
+  `reset_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -105,11 +105,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type_id`, `first_name`, `last_name`, `username`, `password`, `2fa`, `2fa_secret`, `ref_id`, `referrer`, `frg_wallet`, `created`, `modified`) VALUES
-(13, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmail.com', '$2a$10$8h/GTyWvBNkfaTJDveO2muzEFvlMyg.ZQCeMJ0bBcyEZ5rwIdhSya', 0, 'JPHU6DUW3A3LFJXHGJPK5NRVHV5Q6ZIJ', '2BySgjBd6', NULL, 'ghjbunoiiolop', '2018-01-21 22:35:48', '2018-01-21 22:35:48'),
-(14, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmailf.com', '$2a$10$UGKfgJ7zZOrw8NLkxMk.OuuuABXhe/EN83xOtXsYUMaHVP3255.aG', 0, NULL, 'nY3QFZcSZ', NULL, '', '2018-01-21 22:40:57', '2018-01-21 22:40:57'),
-(15, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmailf.fcom', '$2a$10$xXxqO3BnTib4RqXYI4mlPOZG63AzedmsnUdoYEP4eMhG0BAaMC9pC', 0, NULL, '5qQTzGKeB', NULL, '', '2018-01-21 22:47:00', '2018-01-21 22:47:00'),
-(16, 2, 'obumneke', 'gffgfg', 'jeffucfee10@gmailf.fcom', '$2a$10$ujA/UaD4l3n2Jvfg56A.sOBhNJSDiFs3dVLOoeUkQ6gd/egz9ZHDK', 0, NULL, 'kz74zEwA4', NULL, '', '2018-01-21 22:50:21', '2018-01-21 22:50:21');
+INSERT INTO `users` (`id`, `user_type_id`, `first_name`, `last_name`, `username`, `password`, `2fa`, `2fa_secret`, `ref_id`, `referrer`, `frg_wallet`, `email_confirmed`, `reset_password`, `created`, `modified`) VALUES
+(13, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmail.com', '$2a$10$8h/GTyWvBNkfaTJDveO2muzEFvlMyg.ZQCeMJ0bBcyEZ5rwIdhSya', 0, 'JPHU6DUW3A3LFJXHGJPK5NRVHV5Q6ZIJ', '2BySgjBd6', NULL, 'ghjbunoiiolop', 0, NULL, '2018-01-21 22:35:48', '2018-01-21 22:35:48'),
+(14, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmailf.com', '$2a$10$UGKfgJ7zZOrw8NLkxMk.OuuuABXhe/EN83xOtXsYUMaHVP3255.aG', 0, NULL, 'nY3QFZcSZ', NULL, '', 0, NULL, '2018-01-21 22:40:57', '2018-01-21 22:40:57'),
+(15, 2, 'obumneke', 'gffgfg', 'jeffucee10@gmailf.fcom', '$2a$10$xXxqO3BnTib4RqXYI4mlPOZG63AzedmsnUdoYEP4eMhG0BAaMC9pC', 0, NULL, '5qQTzGKeB', NULL, '', 0, NULL, '2018-01-21 22:47:00', '2018-01-21 22:47:00'),
+(16, 2, 'obumneke', 'gffgfg', 'jeffucfee10@gmailf.fcom', '$2a$10$ujA/UaD4l3n2Jvfg56A.sOBhNJSDiFs3dVLOoeUkQ6gd/egz9ZHDK', 0, NULL, 'kz74zEwA4', NULL, '', 0, NULL, '2018-01-21 22:50:21', '2018-01-21 22:50:21');
 
 -- --------------------------------------------------------
 
