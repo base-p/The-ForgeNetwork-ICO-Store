@@ -190,9 +190,29 @@ class UsersController extends AppController {
 	}
     
     public function resetpassword () {
-        //$result=$this->sendMail();
-		$user_id = $this->Auth->User('id');
-        $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
+
+        
+        if ($this->request->is('post') && !empty($this->request->data)) {
+            $email=$this->request->data['email'];
+            $userDetails = $this->User->find('first',array('conditions'=>array('User.username'=>$email)));
+            if(!empty($userDetails)){
+                $user_id = $userDetails['User']['id'];
+                require_once(APP . 'Vendor' . DS. 'genpwd'. DS. 'genpwd.php');
+                $resetkey= genpwd(30);
+                $db = $this->User->getDataSource();
+                    $resetkey1 = $db->value($resetkey, 'string');
+                     $this->User->updateAll(
+                        array('User.reset_password' => $resetkey1),
+                        array('User.id' => $user_id)
+                    );
+                $subject = "Reset Password";
+                $messge = '<html><p>Hi,</p><p>Click <a href="'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'">here</a> to reset your password</p><p>or copy and paste the URL below into your browser window</p><p>'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'</p></html>';
+                $this->sendMail($email,$subject,$messge);
+                $this->Flash->error(__("We've sent an e-mail with instructions on how to reset your password."));
+            }else{
+                $this->Flash->error(__('The email you supplied is not registered'));
+            }
+        }
         
         $this->set(compact('days','result'));
 	}
@@ -214,6 +234,11 @@ class UsersController extends AppController {
                      $this->Session->write('oauth.secret', $this->Auth->User('2fa_secret'));
                     $this->Auth->logout();
                     return $this->redirect(['controller'=>'users','action'=>'confirm2fa']);
+                }
+                if($this->Auth->User('email_confirmed')==0){
+                    $this->Auth->logout();
+                    $this->Flash->error(__('You have not confirmed your email address'));
+                    return $this->redirect(['controller'=>'users','action'=>'login']);
                 }
                return $this->redirect(['controller'=>'users','action'=>'dashboard']);
             }else{
@@ -239,6 +264,7 @@ class UsersController extends AppController {
             $this->User->create();
             $this->request->data['User']['user_type_id']=2;
             $this->request->data['User']['2fa']=0;
+            $this->request->data['User']['email_confirmed']=0;
             require_once(APP . 'Vendor' . DS. 'genpwd'. DS. 'genpwd.php');
             $this->request->data['User']['ref_id'] = genpwd();
             if($this->Session->check('referrer')){
@@ -248,12 +274,14 @@ class UsersController extends AppController {
             
             if ($this->User->save($this->request->data['User'])) {
                  
-                if($this->Auth->login()){
-                     $this->Flash->success(__('Registration was successful'));
-                    return $this->redirect(array('controller'=>'users','action' => 'dashboard'));
-                };
-               
-                
+                    $ref_id=$this->request->data['User']['ref_id'];
+                $email=$this->request->data['User']['username'];
+                $fname=$this->request->data['User']['first_name'];
+                $message= '<html><p>Hi '.$fname.'</p> <p>Click <a href="'.SITEPATH.'users/confirm_email/'.$ref_id.'">here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p> <p>https://shop.theforgenetwork.com/users/confirm_email/'.$ref_id.'</p></html>';
+                $subject='Email verification';
+                $this->sendMail($email,$subject,$message,$fname);
+                     $this->Flash->error(__('Registration was successful, You need to confirm your e-mail to Proceed, please check your e-mail for further instructions'));
+                    return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
         $this->Flash->error(__('The user could not be saved. Please, try again.'));
         
@@ -278,6 +306,33 @@ class UsersController extends AppController {
                    $this->Session->setFlash("Wrong Username or Password!", 'default', array('class' => 'message'));
             $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
                 }   
+          }
+        
+    }
+    
+    function confirm_email($ref_id=NULL) {
+        $this->autoRender = false;
+          if(isset($ref_id)){
+              $userDetails=$this->User->find('first',array('conditions'=>array('User.ref_id'=>$ref_id)));
+              if(!empty($userDetails)){
+                  if($userDetails['User']['email_confirmed']==1){
+                      $this->Flash->error(__('Your e-mail has been previously confirmed, proceed to login'));
+                    return $this->redirect(array('controller'=>'users','action' => 'login'));
+                  }
+                  $this->User->updateAll(
+                        array('User.email_confirmed' => 1),
+                        array('User.id' => $userDetails['User']['id'])
+                    );
+                  $this->Flash->error(__('Your e-mail has been confirmed, proceed to login'));
+                    return $this->redirect(array('controller'=>'users','action' => 'login'));
+              }else{
+                  $this->Flash->error(__('Invalid Confirmation link'));
+                return $this->redirect(array('controller'=>'users','action' => 'login'));
+              }
+                
+          }else{
+              $this->Flash->error(__('Invalid Confirmation link'));
+                return $this->redirect(array('controller'=>'users','action' => 'login'));
           }
         
     }
@@ -370,7 +425,7 @@ class UsersController extends AppController {
         return false;
     }
 } 
-    protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name='No Name'){ 
+    protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name=''){ 
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $mgClient = new Mailgun\Mailgun(MG_SECRET);
@@ -381,7 +436,7 @@ class UsersController extends AppController {
             'from'    => 'ForgeNetwork <postmaster@ico.theforgenetwork.com>',
             'to'      => $name.' <'.$recipient.'>',
             'subject' => $subject,
-            'text'    => $message
+            'html'    => $message
         ));
         return $result;
     
@@ -623,7 +678,7 @@ class UsersController extends AppController {
 
                     $frg_amount= round($amount*$cryptrate/$ourrate['Feed']['feed'],2);
                     $conversion_rate = $cryptrate;
-                    $db = $this->User->getDataSource();
+                    $db = $this->Transaction->getDataSource();
                     $frg_amount = $db->value($frg_amount, 'string');
                     $conversion_rate = $db->value($conversion_rate, 'string');
                      $this->Transaction->updateAll(
@@ -645,7 +700,32 @@ class UsersController extends AppController {
         }
     
     public function new_password($user_id=NULL, $r_key=NULL) {
+        $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
+        if(!empty($userDetails)){
+            $mkey=$userDetails['User']['reset_password'];
+            $email=$userDetails['User']['username'];
+            if($r_key != $mkey){
+                $this->Flash->error(__('Invalid link'));
+                return $this->redirect(['controller'=>'users','action'=>'login']);
+            }
+        }else{
+            $this->Flash->error(__('Invalid link'));
+                return $this->redirect(['controller'=>'users','action'=>'login']);
+        }
+        if($this->request->is('post') && !empty($this->request->data)){
+            $newpwd=$this->request->data['password'];
+            require_once(APP . 'Vendor' . DS. 'genpwd'. DS. 'genpwd.php');
+                $nresetkey= genpwd(30);
+            $userDetails['User']['password']=$newpwd;
+            $userDetails['User']['reset_password']=$nresetkey;
+            if($this->User->save($userDetails['User'])){
+                $this->Flash->error(__('Password changed! Continue with login'));
+                return $this->redirect(['controller'=>'users','action'=>'login']);
+            }
+            $this->Flash->error(__('Something went wrong'));
+                return $this->redirect(['controller'=>'users','action'=>'login']);
+        }
         
-        $this->set(compact('user_id','r_key'));
+        $this->set(compact('user_id','r_key','email'));
 	}
 }

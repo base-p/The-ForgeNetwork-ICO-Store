@@ -13,16 +13,16 @@
     Reset your password
     </h1>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
-                    <p class='c-notice'>We've sent an e-mail with instructions on how to reset your password.</p>
-                    <form class='c-form' action='reset-password.html'>
+                    <div class='c-notice'><?php echo $this->Session->flash(); ?></div>
+                    <?php echo $this->Form->create('User', array('url'=>['controller'=>'users','action'=>'resetpassword'],'class' => 'c-form','id' => 'm-form')); ?>
                         <p class='c-form__row'>
                             <label for='username' class='c-form__label'>E-mail address</label>
-                            <input required id='username' type='text' class='c-form__field' />
+                            <input required id='username' type='text' class='c-form__field'  name="data[email]" />
                         </p>
                         <p class='c-form__row'>
                             <button type='submit'>Reset password</button>
                         </p>
-                    </form>
+                   <?php echo $this->form->end(); ?>
                 </div>
                 <div class='l-col'>
                     <p>
