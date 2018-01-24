@@ -6,7 +6,7 @@
     Reset your password
     </h1>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
-                    <div class='c-notice'><?php echo $this->Session->flash(); ?></div>
+                    <?php echo $this->Session->flash(); ?>
                     <?php echo $this->Form->create('User', array('url'=>['controller'=>'users','action'=>'resetpassword'],'class' => 'c-form','id' => 'm-form')); ?>
                         <p class='c-form__row'>
                             <label for='username' class='c-form__label'>E-mail address</label>
