@@ -649,7 +649,7 @@ class UsersController extends AppController {
                 $feedtitle='usdrate';
                 break;
             case 'LTC':
-                $feedtitle='btclltc';
+                $feedtitle='btcltc';
                 break;
             case 'BCH':
                 $feedtitle='btcbch';
