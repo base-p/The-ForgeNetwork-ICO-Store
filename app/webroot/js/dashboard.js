@@ -11,6 +11,7 @@ $(document).ready(function(){
             var frgreceived = amount*prices[currency]/current_price;
             frgreceived = frgreceived.toFixed(2);
             $('#frgamount').text(frgreceived+' FRG');
+            $('#labeltext').text('Amount of '+currency);
         });
     
      $( "form" ).each( function() {

@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-   public $components = array('DebugKit.Toolbar','Cookie','Session','Flash',
+   public $components = array('Cookie','Session','Flash',
         'Auth' => array(
             'loginRedirect' => array(
                 'controller' => 'users',
@@ -43,7 +43,7 @@ class AppController extends Controller {
             ),
             'loginAction' => array(
                 'controller' => 'users',
-                'action' => 'index',
+                'action' => 'login',
             ),
             'authenticate' => array(
                 'Form' => array(
@@ -63,6 +63,6 @@ class AppController extends Controller {
         $this->Cookie->key = 'qSI232qs*&sXOw!obum@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
 //       $this->Cookie->httpOnly = true;
        $this->Cookie->type('aes');
-        $this->Auth->allow();
+        $this->Auth->allow('index','resetpassword','logout','register','login','confirm_email','checkEmail','recaptcha','sendMail','get_rates','get_usdrate','confirm2fa','ipn_handler','new_password','total_amount');
     }
 }

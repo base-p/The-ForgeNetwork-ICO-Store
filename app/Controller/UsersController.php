@@ -231,7 +231,9 @@ class UsersController extends AppController {
     
     
     public function login() {
-   $this->Auth->logout();
+   if(!empty($this->Auth->User('id'))){
+       return $this->redirect(['controller'=>'users','action'=>'dashboard']);
+   }
         if ($this->request->is('post') && !empty($this->request->data)) {
           if(!empty($_POST['g-recaptcha-response'])){
             $captcha = $this->recaptcha($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
@@ -263,9 +265,20 @@ class UsersController extends AppController {
 	
     
     public function register() {
-        $this->Auth->logout();
+        if(!empty($this->Auth->User('id'))){
+       return $this->redirect(['controller'=>'users','action'=>'dashboard']);
+   }
 		 if ($this->request->is('post') && !empty($this->request->data)) {
-            
+            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['User']['frg_wallet'])) {
+            } else {
+                $this->Flash->error(__('Invalid FRG address'));
+                return $this->redirect(array('controller'=>'users','action' => 'register'));
+            }
+             $exUser=$this->User->find('first',array('conditions'=>array('User.username'=>$this->request->data['User']['username'])));
+             if(!empty($exUser)){
+                 $this->Flash->error(__('Email is taken!'));
+                return $this->redirect(array('controller'=>'users','action' => 'register'));
+             }
              if(!empty($_POST['g-recaptcha-response'])){
             $captcha = $this->recaptcha($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
             }else{$captcha=false;}
@@ -518,7 +531,12 @@ class UsersController extends AppController {
     }
     
     function confirm2fa() {
-		
+		if($this->Session->check('oauth.username') && $this->Session->check('oauth.pass') && $this->Session->check('oauth.secret')){
+            
+        }else{
+            $this->Flash->error(__('Oops! Wrong turn!'));
+            return $this->redirect(['controller'=>'users','action'=>'login']);
+        }
         if($this->request->is('post')){
            if (!empty($this->request->data)) {
                 $username = $this->Session->read('oauth.username');

@@ -109,7 +109,7 @@
                     </select>
                 </p>
                 <p class='c-form__row'>
-                    <label for='amount' class='c-form__label'>Amount</label>
+                    <label for='amount' class='c-form__label' id="labeltext">Amount</label>
                     <span class='c-form__subtitle'>Entering an amount is optional and only used to calculate the estimate below.</span>
                     <input id='amount' type='number' class='c-form__field' name="data[Wallet][amount]"/>
                 </p>

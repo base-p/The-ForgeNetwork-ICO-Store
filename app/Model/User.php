@@ -10,6 +10,14 @@ class User extends AppModel {
             'foreignKey' => 'user_id',
             ),
     );
+    public $validate = array(
+        'username' => array(
+            'rule' => 'email',
+            'required' => true,
+            'allowEmpty' => false,
+            'message' => 'Invalid email'
+            ), 
+    );
     
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
