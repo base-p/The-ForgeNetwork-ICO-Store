@@ -292,7 +292,7 @@ class UsersController extends AppController {
                 $message= '<html><p>Hi '.$fname.'</p> <p>Click <a href="'.SITEPATH.'users/confirm_email/'.$ref_id.'">here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p> <p>https://shop.theforgenetwork.com/users/confirm_email/'.$ref_id.'</p></html>';
                 $subject='Email verification';
                 $this->sendMail($email,$subject,$message,$fname);
-                     $this->Flash->success(__('Registration was successful, You need to confirm your e-mail to Proceed, please check your e-mail for further instructions'));
+                     $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions.'));
                     return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
         $this->Flash->error(__('The user could not be saved. Please, try again.'));
