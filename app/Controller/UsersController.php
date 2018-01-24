@@ -158,7 +158,7 @@ class UsersController extends AppController {
                          ),
                     array('User.id' => $user_id)
                 );
-            $this->Session->setFlash("Your setting have been Saved!", 'default', array('class' => 'message'));
+            $this->Flash->Success("Your setting have been Saved!");
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard_settings'));
         }  
         
@@ -190,7 +190,7 @@ class UsersController extends AppController {
                    return $this->redirect(array('controller'=>'users','action' => 'dashboard_security'));
                    
 	           } else {
-		          $this->Flash->success(__('Invalid code!'));
+		          $this->Flash->error(__('Invalid code!'));
 	           }
           }
         }elseif($this->Auth->User('2fa')==1){
@@ -220,7 +220,7 @@ class UsersController extends AppController {
                 $subject = "Reset Password";
                 $messge = '<html><p>Hi,</p><p>Click <a href="'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'">here</a> to reset your password</p><p>or copy and paste the URL below into your browser window</p><p>'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'</p></html>';
                 $this->sendMail($email,$subject,$messge);
-                $this->Flash->error(__("We've sent an e-mail with instructions on how to reset your password."));
+                $this->Flash->success(__("We've sent an e-mail with instructions on how to reset your password."));
             }else{
                 $this->Flash->error(__('The email you supplied is not registered'));
             }
@@ -292,13 +292,13 @@ class UsersController extends AppController {
                 $message= '<html><p>Hi '.$fname.'</p> <p>Click <a href="'.SITEPATH.'users/confirm_email/'.$ref_id.'">here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p> <p>https://shop.theforgenetwork.com/users/confirm_email/'.$ref_id.'</p></html>';
                 $subject='Email verification';
                 $this->sendMail($email,$subject,$message,$fname);
-                     $this->Flash->error(__('Registration was successful, You need to confirm your e-mail to Proceed, please check your e-mail for further instructions'));
+                     $this->Flash->success(__('Registration was successful, You need to confirm your e-mail to Proceed, please check your e-mail for further instructions'));
                     return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
         $this->Flash->error(__('The user could not be saved. Please, try again.'));
         
            } else{
-                $this->Session->setFlash('We could not verify that you are human');
+                $this->Flash->error('We could not verify that you are human');
             } 
             }
 	}
@@ -311,11 +311,11 @@ class UsersController extends AppController {
               if ($this->Auth->login()) {
                 if($this->Auth->User('usertype_id')!=1){
                     $this->Auth->logout();
-                    $this->Session->setFlash("You dont have permission to access admin area!", 'default', array('class' => 'message'));
+                    $this->Flash->error("You dont have permission to access admin area!", 'default', array('class' => 'message'));
                 }   ;
                 $this->redirect(array('controller' => 'users', 'action' => 'admin_dash','admin'=>1));
                 } else {
-                   $this->Session->setFlash("Wrong Username or Password!", 'default', array('class' => 'message'));
+                   $this->Flash->error("Wrong Username or Password!");
             $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
                 }   
           }
@@ -335,7 +335,7 @@ class UsersController extends AppController {
                         array('User.email_confirmed' => 1),
                         array('User.id' => $userDetails['User']['id'])
                     );
-                  $this->Flash->error(__('Your e-mail has been confirmed, proceed to login'));
+                  $this->Flash->success(__('Your e-mail has been confirmed, proceed to login'));
                     return $this->redirect(array('controller'=>'users','action' => 'login'));
               }else{
                   $this->Flash->error(__('Invalid Confirmation link'));
@@ -735,7 +735,7 @@ class UsersController extends AppController {
             $userDetails['User']['password']=$newpwd;
             $userDetails['User']['reset_password']=$nresetkey;
             if($this->User->save($userDetails['User'])){
-                $this->Flash->error(__('Password changed! Continue with login'));
+                $this->Flash->success(__('Password changed! Continue with login'));
                 return $this->redirect(['controller'=>'users','action'=>'login']);
             }
             $this->Flash->error(__('Something went wrong'));
