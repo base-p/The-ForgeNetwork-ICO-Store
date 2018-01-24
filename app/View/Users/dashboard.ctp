@@ -33,9 +33,7 @@
             <a href='logout'>Logout</a>
         </li>
     </ul>           <h2>Purchase FRG</h2>
-            <br>
             <?php echo $this->Session->flash(); ?>
-            <br>
             <p>
                 Send funds to one of your personal addresses as generated below. You can send funds to the same address multiple times. Every
                 transaction will be listed on the <a href='dashboard_transactions'>transactions</a> page separately.
