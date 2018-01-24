@@ -9,12 +9,6 @@
         prices['DOGE'] = <?php echo $prices['btcdoge']; ?>;
         var current_price = <?php echo $prices['current_price']; ?>;
     </script>
-    <style>
-       #amount-error{
-            color: white;
-        }
-        
-    </style>
 
         <?php echo $this->element('header');?>       <div class='contentContainer'>
                 <section class='l-row l-row--dashboard'>
