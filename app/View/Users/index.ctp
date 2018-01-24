@@ -94,7 +94,7 @@
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
     Join the presale
-    </h2>            <p class='c-pageIntroduction'>So far, <code>100 FRG</code> have been sold</p>            <div class='l-cols l-cols--2'>
+    </h2>            <p class='c-pageIntroduction'>So far, <code>$<?php echo $total; ?></code> have been received</p>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
                     <p>
                         The Forge Network is a highly anticipated up and coming grassroots cryptocurrency. A Proof-of-Work/Proof-of-Stake
@@ -112,7 +112,7 @@
                         benefit, the benefits of The Forge Network's tech is a huge standout as well. ForgeNet is one of the first,
                         if not the first,  to aggressively target the connected home audience. Compounding that with the mobile market,
                         total community involvement, user friendliness, a trustless decentralized exchange, and a decentralized marketplace
-                        are all recipes for success. Get involved today and ride this past the moon and straight to Mars ðŸš€.
+                        are all recipes for success. Get involved today and ride this past the moon and straight to Mars.
                     </p>
                 </div>
             </div>

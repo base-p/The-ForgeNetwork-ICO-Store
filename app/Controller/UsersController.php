@@ -46,7 +46,10 @@ class UsersController extends AppController {
  *   or MissingViewException in debug mode.
  */
 	public function index() {
-		
+		$total = $this->Val->find('first',array('conditions'=>array('Val.title'=>'total')));
+        $total=$total['Val']['val'];
+        $total = number_format($total);
+        $this->set(compact('total'));
 	}
     
     
