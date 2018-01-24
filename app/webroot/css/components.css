@@ -386,7 +386,7 @@
     margin-bottom: 1.5em;
     padding-top: .45em;
     padding-left: 95px;
-    background: transparent no-repeat 0 0;
+    background: transparent no-repeat 0 50%;
     background-size: 80px;
 }
 
@@ -400,6 +400,10 @@
 
 .c-addresses__address p {
     margin: 0;
+}
+
+.c-addresses__address p span {
+    display: block;
 }
 
 .c-addresses__address code {

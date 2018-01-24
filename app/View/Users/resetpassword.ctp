@@ -1,12 +1,5 @@
 <body class='login'>
-        <section class='l-row l-row--menu p-menu'>
-    <div class='l-row__inner'>
-        <a href='home.html' class='c-minimalLogo'>
-    <img class='c-minimalLogo__avatar' src='img/favicon.png' width='18' height='18' alt=''>
-    <span class='c-minimalLogo__company u-fontHeadings'>ForgeNet</span>
-    <span class='c-minimalLogo__tagLine'>ICO Shop</span>
-</a>    </div>
-</section>        <div class='contentContainer'>
+        <?php echo $this->element('header');?>      <div class='contentContainer'>
                 <section class='l-row'>
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
@@ -30,7 +23,7 @@
                         We'll be there to help you out. You'll be up and running in notime.
                     </p>
                     <p>
-                        Don't have an account yet? You can <a href='register.html'>register</a> here.
+                        Don't have an account yet? You can <a href='register'>register</a> here.
                     </p>
                 </div>
             </div>

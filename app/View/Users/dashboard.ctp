@@ -13,16 +13,10 @@
        #amount-error{
             color: white;
         }
+        
     </style>
 
-        <section class='l-row l-row--menu p-menu'>
-    <div class='l-row__inner'>
-        <a href='home.html' class='c-minimalLogo'>
-    <img class='c-minimalLogo__avatar' src='img/favicon.png' width='18' height='18' alt=''>
-    <span class='c-minimalLogo__company u-fontHeadings'>ForgeNet</span>
-    <span class='c-minimalLogo__tagLine'>ICO Shop</span>
-</a>    </div>
-</section>        <div class='contentContainer'>
+        <?php echo $this->element('header');?>       <div class='contentContainer'>
                 <section class='l-row l-row--dashboard'>
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
@@ -45,6 +39,9 @@
             <a href='logout'>Logout</a>
         </li>
     </ul>           <h2>Purchase FRG</h2>
+            <br>
+            <?php echo $this->Session->flash(); ?>
+            <br>
             <p>
                 Send funds to one of your personal addresses as generated below. You can send funds to the same address multiple times. Every
                 transaction will be listed on the <a href='dashboard_transactions'>transactions</a> page separately.
@@ -78,7 +75,29 @@
                             }
                         ?>
                     </h4>
-                    <p><code><?php echo $wallet['Wallet']['address']; ?></code></p>
+                    <p>
+                        <span><code><?php echo $wallet['Wallet']['address']; ?></code></span>
+                        <span>Minimal transaction: <code><?php 
+                            switch ($wallet['Wallet']['currency']) {
+                            case 'ETH':
+                                echo '0.178 ETH';
+                                break;
+                            case 'BTC':
+                                echo '0.016 BTC';
+                                break;
+                            case 'LTC':
+                                echo '1 LTC';
+                                break;
+                            case 'BCH':
+                                echo '0.11 BCH';
+                                break;
+                            case 'DOGE':
+                                echo '26211 DOGE';
+                                break;
+                            }
+                        ?></code></span>
+                    </p>
+                    
                 </li>
                 <?php }; ?>
             </ul>
@@ -86,7 +105,7 @@
             <h3>Generate a personal payment address</h3>
             
            <?php echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard'],'class' => 'c-form','id' => 'm-form')); ?>
-                     <?php echo $this->Session->flash(); ?>
+                     
                 <p class='c-form__row'>
                     <label for='currency' class='c-form__label'>Select currency to pay with</label>
                     <select required id='currency' class='c-form__field' name="data[Wallet][currency]">
@@ -106,13 +125,7 @@
                     <span class='c-form__label'>Amount of FRG you'll receive</span>
                     <span class='c-form__field'><code id="frgamount">... FRG</code></span>
                 </p> 
-                <?php if(isset($address) && isset($currency)){ ?>
-                <p class='c-form__row'>
-                    <span class='c-form__label'>Send <?php echo $amount ?> <?php echo $currency ?> to:</span>
-                    <span class='c-form__field'><code><?php echo $address ?></code></span>
-                    <span class='c-form__label'>Sending any currency other than <?php echo $currency ?> to the above address will result in the loss of your funds.</span>
-                </p>
-                <?php } ?>
+                
                 <p class='c-form__row'>
                     <button type='submit'>Generate address</button>
                 </p>

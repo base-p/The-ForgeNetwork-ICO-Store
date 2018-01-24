@@ -1,12 +1,6 @@
 <body class='login'>
-        <section class='l-row l-row--menu p-menu'>
-    <div class='l-row__inner'>
-        <a href='home.html' class='c-minimalLogo'>
-            <?php echo $this->Html->image('favicon.png',['class'=>'c-minimalLogo__avatar','width'=>'18','height'=>'18','alt'=>'']); ?>
-    <span class='c-minimalLogo__company u-fontHeadings'>ForgeNet</span>
-    <span class='c-minimalLogo__tagLine'>ICO Shop</span>
-</a>    </div>
-</section>        <div class='contentContainer'>
+    <?php echo $this->element('header');?>
+                <div class='contentContainer'>
                 <section class='l-row'>
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>

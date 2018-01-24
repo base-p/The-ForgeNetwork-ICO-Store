@@ -39,7 +39,7 @@ $(document).ready(function(){
             },
            "data[User][password]": {
 		      required: "Enter Password!",
-		      minlength: "8 characters!"
+		      minlength: "The password must be at least 8 characters long"
            },
             "data[User][username]": {
                 required: "We need your Email!",

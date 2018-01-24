@@ -1,13 +1,6 @@
 <body class='dashboard dashboard--purchase'>
 
- <section class='l-row l-row--menu p-menu'>
-    <div class='l-row__inner'>
-        <a href='home.html' class='c-minimalLogo'>
-    <img class='c-minimalLogo__avatar' src='img/favicon.png' width='18' height='18' alt=''>
-    <span class='c-minimalLogo__company u-fontHeadings'>ForgeNet</span>
-    <span class='c-minimalLogo__tagLine'>ICO Shop</span>
-</a>    </div>
-</section>        <div class='contentContainer'>
+<?php echo $this->element('header');?>     <div class='contentContainer'>
                 <section class='l-row l-row--dashboard'>
                     <div class='l-row__inner'>
                     <h2><?php echo $message; ?></h2>

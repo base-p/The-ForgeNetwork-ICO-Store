@@ -35,7 +35,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $uses = array('User','Feed','Wallet','Transaction');
+	public $uses = array('User','Feed','Wallet','Transaction','Val');
 
 /**
  * Displays a view
@@ -89,13 +89,13 @@ class UsersController extends AppController {
                 }
                 if($this->Wallet->save($wallet_arr)){
                     $wallets = $this->Wallet->find('all',array('conditions'=>array('Wallet.user_id'=>$user_id)));
-                     $this->Flash->Success(__('Success!'));
+                     $this->Flash->Success(__('Successfully generated '.$currency.' address. This is a personal address. Funds sent to this address will be exchanged to FRG.'));
                 }else{
                     $this->Flash->error(__('Something went Wrong!'));
                 }
             }else{
                 $address=$userWallet['Wallet']['address'];
-                $this->Flash->Success(__('Success!'));
+                $this->Flash->Success(__('Successfully generated '.$currency.' address. This is a personal address. Funds sent to this address will be exchanged to FRG.'));
             }
             
         }
@@ -442,8 +442,9 @@ class UsersController extends AppController {
 
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
-            'from'    => 'ForgeNetwork <postmaster@ico.theforgenetwork.com>',
+            'from'    => 'ForgeNetwork <shop@mail.theforgenetwork.com>',
             'to'      => $name.' <'.$recipient.'>',
+            'h:reply-to' => 'ForgeNetwork Support <support@theforgenetwork.com>',
             'subject' => $subject,
             'html'    => $message
         ));
@@ -480,6 +481,8 @@ class UsersController extends AppController {
                     array('Feed.title' => 'btcbch')
         );
     }
+                die;
+
     }
     
     public function get_usdrate(){
@@ -508,7 +511,8 @@ class UsersController extends AppController {
 		      //return $usdRate;
               
           }
-  
+                die;
+
     }
     
     function confirm2fa() {
@@ -736,5 +740,27 @@ class UsersController extends AppController {
         }
         
         $this->set(compact('user_id','r_key','email'));
+	}
+    
+    public function total_amount() {
+        $this->autoRender = false;
+        $txns = $this->Transaction->find('all');
+        $sum=0;
+        if(!empty($txns)){
+            foreach($txns as $txn){
+                if(isset($txn['Transaction']['conversion_rate'])){
+                    $rate = $txn['Transaction']['conversion_rate'];
+                    $amount = $txn['Transaction']['amount'];
+                    $sum += $rate*$amount;
+                }
+            }
+            $sum = round($sum);
+            $this->Val->updateAll(
+                        array('Val.val' => $sum),
+                        array('Val.title' => 'total')
+                    );
+            
+        }
+        die;
 	}
 }
