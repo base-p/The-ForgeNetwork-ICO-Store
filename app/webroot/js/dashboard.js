@@ -18,13 +18,11 @@ $(document).ready(function(){
        errorElement: "div",
        rules: {
            "data[Wallet][amount]": {
-		          required: true,
 		          number: true
             }
         },
         messages: {
             "data[Wallet][amount]": {
-		          required: "Enter amount!",
 		          number: "Enter a valid amount!"
             }
         }

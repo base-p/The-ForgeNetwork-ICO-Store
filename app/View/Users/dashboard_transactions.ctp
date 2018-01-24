@@ -11,7 +11,7 @@
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
     ForgeNet ICO Dashboard
-    <span class='c-pageTitle__subtitle'>Welcome, Peter</span></h1>            
+    <span class='c-pageTitle__subtitle'>Welcome, <?php echo ucfirst($fname); ?></span></h1>            
 <ul class='c-menu'>
             <li>
             <a href='dashboard'>Purchase</a>
@@ -33,7 +33,7 @@
                 Your transaction history shows all of your transactions. A transaction can have the status
                 <code>pending</code> or <code>completed</code> or <code>error</code>. Pending transactions will be completed as soon
                 we have received sufficient confirmations. Transactions with Error status may never be completed and has probably been double spent or reversed to you. If you've got a question regarding a transaction,
-                please join us on one of our channels and refer to the transaction <code>ID</code>.
+                please join us on one of our channels and refer to the transaction <code>ID</code>. FRG Amount is computed when payment has been confirmed on the blockchain.
             </p>
             <?php if(!empty($txns)){ ?>
             <table>
@@ -43,6 +43,8 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Amount(FRG)</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -51,6 +53,8 @@
                     <tr>
                         <td><?php echo $txn['Transaction']['id']; ?></td>
                         <td><?php echo $txn['Transaction']['created']; ?></td>
+                        <td><?php echo $txn['Transaction']['amount']; ?></td>
+                        <td><?php echo $txn['Wallet']['currency']; ?></td>
                         <td><?php echo $txn['Transaction']['frg_amount']; ?> FRG</td>
                         <td><?php echo $txn['Transaction']['status']; ?></td>
                     </tr>

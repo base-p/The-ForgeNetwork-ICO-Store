@@ -62,10 +62,13 @@ class UsersController extends AppController {
                 $prices[$key]=$price*$prices['usdrate'];
             }
         }
-        
+        $wallets = $this->Wallet->find('all',array('conditions'=>array('Wallet.user_id'=>$user_id)));
+        $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
+        $fname=$userDetails['User']['first_name'];
        // $usdRate = $this->getRates();
         if($this->request->is('post') && !empty($this->request->data)){
             $amount=abs($this->request->data['Wallet']['amount']);
+            if($amount==0){$amount=NULL;};
             $currency=$this->request->data['Wallet']['currency'];
             $userWallet = $this->Wallet->find('first',array('conditions'=>array('Wallet.user_id'=>$user_id,'Wallet.currency'=>$currency)));
             if(empty($userWallet)){
@@ -85,6 +88,7 @@ class UsersController extends AppController {
                     );
                 }
                 if($this->Wallet->save($wallet_arr)){
+                    $wallets = $this->Wallet->find('all',array('conditions'=>array('Wallet.user_id'=>$user_id)));
                      $this->Flash->Success(__('Success!'));
                 }else{
                     $this->Flash->error(__('Something went Wrong!'));
@@ -95,11 +99,13 @@ class UsersController extends AppController {
             }
             
         }
-        $this->set(compact('days','prices','address','currency','amount'));
+        $this->set(compact('days','prices','address','currency','amount','wallets','fname'));
 	}
     
     public function dashboard_transactions() {
 		$user_id = $this->Auth->User('id'); 
+        $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
+        $fname=$userDetails['User']['first_name'];
          $txns = $this->Transaction->find('all',array('conditions'=>array('Transaction.user_id'=>$user_id)));
         if(!empty($txns)){
         $earned=0;
@@ -119,7 +125,7 @@ class UsersController extends AppController {
         
         }
         
-        $this->set(compact('txns','earned'));
+        $this->set(compact('txns','earned','fname'));
         
 	}
     
@@ -156,7 +162,9 @@ class UsersController extends AppController {
 	}
     
       public function dashboard_security() {
-		$user_id = $this->Auth->User('id'); 
+          $user_id = $this->Auth->User('id');
+          $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
+        $fname=$userDetails['User']['first_name'];
            $fa2object=[];
         if($this->Auth->User('2fa')==0){
             require_once(APP . 'Vendor' . DS. 'oauth'.DS.'rfc6238.php');
@@ -187,7 +195,7 @@ class UsersController extends AppController {
         }
           
           
-         $this->set(compact('fa2object')); 
+         $this->set(compact('fa2object','fname')); 
 	}
     
     public function resetpassword () {

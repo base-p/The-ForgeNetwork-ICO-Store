@@ -27,7 +27,7 @@
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
     ForgeNet ICO Dashboard
-    <span class='c-pageTitle__subtitle'>Welcome, Peter</span></h1>            
+    <span class='c-pageTitle__subtitle'>Welcome, <?php echo ucfirst($fname); ?></span></h1>            
 <ul class='c-menu'>
             <li class='c-menu--active'>
             <a href='dashboard'>Purchase</a>
@@ -44,15 +44,46 @@
     <li>
             <a href='logout'>Logout</a>
         </li>
-    </ul>            <h2>Purchase FRG</h2>
+    </ul>           <h2>Purchase FRG</h2>
             <p>
-                For simplicity and accessibility, we are accepting all Coinbase currencies, aswell as Doge.
-                You can purchase FRG by selecting the currency and amount you wish to pay with below. After
-                submitting your order, you'll be provided with an address for the selected currency.
-                After you have sent the payment, return to transaction history for more details. Your transaction history will be visible
-                <a href='dashboard_transactions'>here</a>. You'll see pending aswell as completed transactions there.
-                Pending transactions will be marked complete as soon as enough confirmations have been received.<strong> Actual amount of FRG received will be determined when your payment is confirmed on the blockchain.</strong>
+                Send funds to one of your personal addresses as generated below. You can send funds to the same address multiple times. Every
+                transaction will be listed on the <a href='dashboard_transactions'>transactions</a> page separately.
             </p>
+            <p>
+                Make sure that the currency you send, matches the one of the generated address. Failing to do so, will
+                result in the loss of your funds!
+            </p>
+           <?php if(!empty($wallets)){ ?>
+            <ul class='c-addresses u-flatList'>
+                <?php foreach($wallets as $wallet){ ?>
+                <li class='c-addresses__address c-addresses__address--<?php echo strtolower($wallet['Wallet']['currency']); ?>'>
+                    <h4>
+                        <?php 
+                            switch ($wallet['Wallet']['currency']) {
+                            case 'ETH':
+                                echo 'Ethereum';
+                                break;
+                            case 'BTC':
+                                echo 'Bitcoin';
+                                break;
+                            case 'LTC':
+                                echo 'Litecoin';
+                                break;
+                            case 'BCH':
+                                echo 'Bitcoin Cash';
+                                break;
+                            case 'DOGE':
+                                echo 'DOGE';
+                                break;
+                            }
+                        ?>
+                    </h4>
+                    <p><code><?php echo $wallet['Wallet']['address']; ?></code></p>
+                </li>
+                <?php }; ?>
+            </ul>
+            <?php }; ?>
+            <h3>Generate a personal payment address</h3>
             
            <?php echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard'],'class' => 'c-form','id' => 'm-form')); ?>
                      <?php echo $this->Session->flash(); ?>
@@ -68,13 +99,14 @@
                 </p>
                 <p class='c-form__row'>
                     <label for='amount' class='c-form__label'>Amount</label>
-                    <input required id='amount' type='number' class='c-form__field' name="data[Wallet][amount]"/>
+                    <span class='c-form__subtitle'>Entering an amount is optional and only used to calculate the estimate below.</span>
+                    <input id='amount' type='number' class='c-form__field' name="data[Wallet][amount]"/>
                 </p>
                 <p class='c-form__row' id="displayrecv">
                     <span class='c-form__label'>Amount of FRG you'll receive</span>
                     <span class='c-form__field'><code id="frgamount">... FRG</code></span>
                 </p> 
-                <?php if(isset($address) && isset($amount) && isset($currency)){ ?>
+                <?php if(isset($address) && isset($currency)){ ?>
                 <p class='c-form__row'>
                     <span class='c-form__label'>Send <?php echo $amount ?> <?php echo $currency ?> to:</span>
                     <span class='c-form__field'><code><?php echo $address ?></code></span>
@@ -82,7 +114,7 @@
                 </p>
                 <?php } ?>
                 <p class='c-form__row'>
-                    <button type='submit'>Purchase</button>
+                    <button type='submit'>Generate address</button>
                 </p>
              <?php echo $this->form->end(); ?>
         </div>
