@@ -4,8 +4,8 @@ $(document).ready(function(){
         var frgreceived = amount*prices[currency]/current_price;
         frgreceived = frgreceived.toFixed(2);
         $('#frgamount').text(frgreceived+' FRG');
-     $('#currency,#amount')
-        .change(function(){
+
+     $('#currency, #amount').on('input', function() {
             var currency =  $('#currency').val();  
             var amount = Math.abs($('#amount').val()); 
             var frgreceived = amount*prices[currency]/current_price;
