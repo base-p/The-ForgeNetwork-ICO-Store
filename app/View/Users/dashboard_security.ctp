@@ -26,7 +26,7 @@
                 Please enable two-factor authentication for you to secure your profile. Enable this by scanning
                 the following QR code (Using Google Authenticator or Authy) and entering the one-time code in the following field. Also Back-up your 2FA secret, it will be needed if you loose your phone.
             </p>
-             <code><?php echo $this->Session->flash(); ?></code>
+            <?php echo $this->Session->flash(); ?>
             <?php 
             if(!empty($fa2object)){
             echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard_security'],'class' => 'c-form','id' => 'm-form')); ?>
