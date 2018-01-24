@@ -4,7 +4,7 @@
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
     ForgeNet ICO Dashboard
-    <span class='c-pageTitle__subtitle'>Welcome, <?php echo ucfirst($fname); ?></span></h1>            
+    <span class='c-pageTitle__subtitle'>Welcome, <?php echo htmlspecialchars(ucfirst($fname), ENT_QUOTES); ?></span></h1>            
 <ul class='c-menu'>
             <li>
             <a href='dashboard'>Purchase</a>

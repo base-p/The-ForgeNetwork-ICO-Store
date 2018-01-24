@@ -17,7 +17,7 @@
         <div class='l-row__inner'>
             <h1 class='c-pageTitle'>
     ForgeNet ICO Dashboard
-    <span class='c-pageTitle__subtitle'>Welcome, <?php echo ucfirst($fname); ?></span></h1>            
+    <span class='c-pageTitle__subtitle'>Welcome, <?php echo htmlspecialchars(ucfirst($fname), ENT_QUOTES); ?></span></h1>            
 <ul class='c-menu'>
             <li>
             <a href='dashboard'>Purchase</a>
@@ -39,19 +39,19 @@
                      <?php echo $this->Session->flash(); ?>
                 <p class='c-form__row'>
                     <span class='c-form__label'>E-mail address</span>
-                    <span class='c-form__field'><?php echo $email;?></span>
+                    <span class='c-form__field'><?php echo htmlspecialchars($email, ENT_QUOTES);?></span>
                 </p>
                 <p class='c-form__row'>
                     <label for='firstName' class='c-form__label'>First name</label>
-                    <input required id='firstName' type='text' class='c-form__field' name="data[fname]" value='<?php echo $fname;?>' />
+                    <input required id='firstName' type='text' class='c-form__field' name="data[fname]" value='<?php echo htmlspecialchars($fname, ENT_QUOTES);?>' />
                 </p>
                 <p class='c-form__row'>
                     <label for='lastName' class='c-form__label'>Last name</label>
-                    <input required id='lastName' type='text' class='c-form__field' name="data[lname]" value='<?php echo $lname;?>' />
+                    <input required id='lastName' type='text' class='c-form__field' name="data[lname]" value='<?php echo htmlspecialchars($lname, ENT_QUOTES);?>' />
                 </p>
                 <p class='c-form__row'>
                     <label for='frg' class='c-form__label'>FRG address</label>
-                    <input required id='frg' type='text' class='c-form__field' name="data[frg_wallet]" value="<?php echo $frg_wallet;?>"/>
+                    <input required id='frg' type='text' class='c-form__field' name="data[frg_wallet]" value="<?php echo htmlspecialchars($frg_wallet, ENT_QUOTES);?>"/>
                 </p>
                 <p class='c-form__row'>
                     <button type='submit'>Update</button>
