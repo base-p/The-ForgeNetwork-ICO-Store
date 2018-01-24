@@ -48,7 +48,7 @@
                         <td><?php echo $txn['Transaction']['created']; ?></td>
                         <td><?php echo $txn['Transaction']['amount']; ?></td>
                         <td><?php echo $txn['Wallet']['currency']; ?></td>
-                        <td><?php echo $txn['Transaction']['frg_amount']; ?> FRG</td>
+                        <td><?php if(!empty($txn['Transaction']['frg_amount'])) {echo $txn['Transaction']['frg_amount'].' FRG';}else{echo '...';} ?></td>
                         <td><?php echo $txn['Transaction']['status']; ?></td>
                     </tr>
                      <?php }?>
