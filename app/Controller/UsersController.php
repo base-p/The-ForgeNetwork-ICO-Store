@@ -186,7 +186,6 @@ class UsersController extends AppController {
                         array('User.id' => $user_id)
                     );
                     $this->Session->write('Auth.User.2fa', 1);
-                    $this->Flash->Success(__('Two-factor authentication activated.'));
                    return $this->redirect(array('controller'=>'users','action' => 'dashboard_security'));
                    
 	           } else {
