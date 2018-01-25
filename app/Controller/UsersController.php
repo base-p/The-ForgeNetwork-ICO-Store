@@ -124,6 +124,27 @@ class UsersController extends AppController {
             } else {
                 $txns[$key]['Transaction']['status']='Pending';
             }
+            
+            switch ($txn['Wallet']['currency']) {
+                case 'ETH':
+                    $min=0.165;
+                    break;
+                case 'BTC':
+                    $min=0.015;
+                    break;
+                case 'LTC':
+                    $min=0.9;
+                    break;
+                case 'BCH':
+                    $min=0.1;
+                    break;
+                case 'DOGE':
+                    $min=26000;
+                    break;
+            }
+            if($txn['Transaction']['amount']<$min){
+                unset($txns[$key]);
+            }
         }
         
         }

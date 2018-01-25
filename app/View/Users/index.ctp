@@ -94,7 +94,7 @@
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
     Join the presale
-    </h2>            <p class='c-pageIntroduction'>So far, <code>$<?php echo $total; ?></code> have been received</p>            <div class='l-cols l-cols--2'>
+    </h2>            <p class='c-pageIntroduction'>So far, <code>$<?php echo $total; ?></code> has been purchased</p>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
                     <p>
                         The Forge Network is a highly anticipated up and coming grassroots cryptocurrency. A Proof-of-Work/Proof-of-Stake
