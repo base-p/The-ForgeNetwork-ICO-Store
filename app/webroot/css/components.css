@@ -6,7 +6,7 @@
     position: relative;
     overflow: hidden;
     height: 500px;
-    min-height: 70vh;
+    min-height: 50vh;
     color: #fff;
     background: #000 url(../img/masthead.jpg) no-repeat 50% 50%;
     background-size: cover;
