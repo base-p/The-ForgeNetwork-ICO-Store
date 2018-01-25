@@ -132,6 +132,32 @@
             </p>
         </div>
     </section>
+        <section class="l-row l-row--calculator l-row--tint">
+            <div class="l-row__inner">
+                <h2>FRG calculator</h2>
+                <p>Want to know the amount of FRG you'll receive? We've built a little calculator to help you out. Please note that the shown amount is an estimate: the final conversion takes place upon completion of the transaction, and exchange rates may vary.</p>
+                <form class="c-form c-calculator">
+                    <p class="c-form__row">
+                        <label for="c-calculator--currency" class="c-form__label">Select currency you plan to pay with</label>
+                        <select id="c-calculator--currency" class="c-form__field">
+                            <option value="BTC">Bitcoin</option>
+                            <option value="ETH">Ethereum</option>
+                            <option value="LTC">Litecoin</option>
+                            <option value="BCH">Bitcoin Cash</option>
+                            <option value="DOGE">Doge</option>
+                        </select>
+                    </p>
+                    <p class="c-form__row">
+                        <label for="c-calculator--paymentAmount" class="c-form__label">Payment amount</label>
+                        <input id="c-calculator--paymentAmount" type="number" class="c-form__field" />
+                    </p>
+                    <p class="c-form__row">
+                        <span class="c-form__label">Amount of FRG you'll receive</span>
+                        <span class="c-form__field"><code id="c-calculator--frgAmount">... FRG</code></span>
+                    </p>
+                </form>
+            </div>
+        </section>
         </div>
     <?php echo $this->element('footer');?>
               <?php echo $this->Html->script('countDown');?>

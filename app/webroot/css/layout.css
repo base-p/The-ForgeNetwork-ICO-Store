@@ -77,6 +77,10 @@ body {
     color: #000;
 }
 
+.l-row--tint {
+    background-color: #e6e6e6;
+}
+
 /**
  * Cols
  */

@@ -1,37 +1,3 @@
-// $(document).ready(function(){
-//      var currency =  $('#currency').val();
-//         var amount = Math.abs($('#amount').val());
-//         var frgreceived = amount*prices[currency]/current_price;
-//         frgreceived = frgreceived.toFixed(2);
-//         $('#frgamount').text(frgreceived+' FRG');
-//
-//      $('#currency, #amount').on('input', function() {
-//             var currency =  $('#currency').val();
-//             var amount = Math.abs($('#amount').val());
-//             var frgreceived = amount*prices[currency]/current_price;
-//             frgreceived = frgreceived.toFixed(2);
-//             $('#frgamount').text(frgreceived+' FRG');
-//             $('#labeltext').text('Amount of '+currency);
-//         });
-//
-//      $( "form" ).each( function() {
-//     $( this ).validate( {
-//        errorElement: "div",
-//        rules: {
-//            "data[Wallet][amount]": {
-// 		          number: true
-//             }
-//         },
-//         messages: {
-//             "data[Wallet][amount]": {
-// 		          number: "Enter a valid amount!"
-//             }
-//         }
-//
-//    } );
-//     } );
-// });
-
 (function () {
     'use strict';
 
@@ -45,6 +11,7 @@
         generateAddressContainer = document.getElementById('generateAddress');
 
         setupAddressGeneration();
+        setupFrgCalculator();
     }
 
     function setupAddressGeneration () {
@@ -67,6 +34,16 @@
                 generateAddressContainer.classList.remove('c-generateAddress--active');
                 isAddressGenerationActive = false;
             }
+        });
+    }
+
+    function setupFrgCalculator () {
+        $('#c-calculator--currency, #c-calculator--paymentAmount').on('input', function () {
+            var currency =  $('#c-calculator--currency').val();
+            var amount = Math.abs($('#c-calculator--paymentAmount').val());
+            var frgReceived = amount * prices[currency] / current_price;
+            frgReceived = frgReceived.toFixed(2);
+            $('#c-calculator--frgAmount').text(frgReceived +' FRG');
         });
     }
 
