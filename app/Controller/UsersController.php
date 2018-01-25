@@ -92,13 +92,13 @@ class UsersController extends AppController {
                 }
                 if($this->Wallet->save($wallet_arr)){
                     $wallets = $this->Wallet->find('all',array('conditions'=>array('Wallet.user_id'=>$user_id)));
-                     $this->Flash->Success(__('Successfully generated '.$currency.' address. This is a personal address. Funds sent to this address will be exchanged to FRG.'));
+                     $this->Flash->Success(__('Successfully generated your personal '.$currency.' address. Send funds to this address (see step 2) to claim your FRG!'));
                 }else{
                     $this->Flash->error(__('Unable to generate an address. Please try again. If this problem persists, please contact an FRG team member.'));
                 }
             }else{
                 $address=$userWallet['Wallet']['address'];
-                $this->Flash->Success(__('Successfully generated '.$currency.' address. This is a personal address. Funds sent to this address will be exchanged to FRG.'));
+                $this->Flash->Success(__('Successfully generated your personal '.$currency.' address. Send funds to this address (see step 2) to claim your FRG!'));
             }
             
         }
