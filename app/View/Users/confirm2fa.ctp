@@ -33,7 +33,7 @@
                 </div>
                 <div class='l-col'>
                     <p>
-                        Dont Have Access to your phone? Please contact us at one of our social media channels.
+                        Don't have access to your authenticator? Please contact us at one of our social media channels.
                         We'll be there to help you out. You'll be up and running in no time.
                     </p>
                     
