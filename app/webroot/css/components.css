@@ -462,7 +462,7 @@
  */
 
 .c-purchaseSteps {
-    margin-bottom: 1.6em;
+    margin-bottom: 1.6em !important;
 }
 
 .c-purchaseSteps__step {
