@@ -66,7 +66,7 @@
                 <?php echo $this->form->end(); ?>
             </div>
             <h2>Send funds</h2>
-            <p>Congratulations. You can now safely send funds to one of the generated addresses below. These addresses are
+            <p>You can safely send funds to one of the generated addresses below. These addresses are
             <em>personal</em>. You can use an address for multiple transactions. Make sure that the currency you send, matches
             the one of the generated address. Failing to do so, will result in the loss of your funds!</p>
             <?php if(!empty($wallets)){ ?>
