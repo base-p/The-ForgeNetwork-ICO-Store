@@ -187,3 +187,7 @@ body {
 .dashboard .c-form__subtitle {
     color: #fff;
 }
+
+.dashboard--purchase h2 {
+    margin: 2em 0 .5em;
+}
