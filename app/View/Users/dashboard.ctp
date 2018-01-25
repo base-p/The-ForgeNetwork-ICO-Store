@@ -125,7 +125,7 @@
             <p>
                 Every time you send funds to one of the above addresses, a new transaction will be generated.
                 Sent funds will be converted to FRG upon completion of the transaction. All of your transactions will
-                be visible on the transactions page.
+                be visible on the <a href='dashboard_transactions'>transactions page</a>.
             </p>
         </div>
     </section>
