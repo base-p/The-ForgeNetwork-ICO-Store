@@ -225,8 +225,10 @@
     background: transparent;
     text-decoration: none;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
+.c-button--active,
 .c-button:hover {
     background: #ff0006;
     color: #fff;
@@ -237,6 +239,7 @@
     border-color: #fff;
 }
 
+.c-button--white.c-button--active,
 .c-button--white:hover {
     color: #000;
     background-color: #fff;
@@ -452,4 +455,43 @@
 
 #flashMessage.error {
     background: #e57c68;
+}
+
+/**
+ * Purchase steps
+ */
+
+.c-purchaseSteps {
+    margin-bottom: 1.6em;
+}
+
+.c-purchaseSteps__step {
+    display: inline-block;
+    margin-bottom: .5em;
+    margin-right: 1em;
+}
+
+.c-purchaseSteps__count {
+    display: inline-block;
+    padding: 0 0.6em;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    margin-right: .5em;
+}
+
+/**
+ * Generate address
+ */
+
+.c-generateAddress {
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    margin: 0 auto 1.6em;
+    padding: 2em 2em 1em;
+    display: none;
+}
+
+.c-generateAddress--active {
+    display: block;
 }

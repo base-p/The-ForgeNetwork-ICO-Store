@@ -32,17 +32,44 @@
     <li>
             <a href='logout'>Logout</a>
         </li>
-    </ul>           <h2>Purchase FRG</h2>
+    </ul>
+            <ol class="u-flatList c-purchaseSteps">
+                <li class='c-purchaseSteps__step'>
+                    <span class='c-purchaseSteps__count'>1</span> Generate address
+                </li>
+                <li class='c-purchaseSteps__step'>
+                    <span class='c-purchaseSteps__count'>2</span> Send funds
+                </li>
+                <li class='c-purchaseSteps__step'>
+                    <span class='c-purchaseSteps__count'>3</span> Get FRG
+                </li>
+            </ol>
             <?php echo $this->Session->flash(); ?>
-            <p>
-                Send funds to one of your personal addresses as generated below. You can send funds to the same address multiple times. Every
-                transaction will be listed on the <a href='dashboard_transactions'>transactions</a> page separately.
-            </p>
-            <p>
-                Make sure that the currency you send, matches the one of the generated address. Failing to do so, will
-                result in the loss of your funds!
-            </p>
-           <?php if(!empty($wallets)){ ?>
+            <h2>Generate address</h2>
+            <p><span id='toggleAddressGeneration' class="c-button c-button--white">Generate new address</span></p>
+            <div id='generateAddress' class='c-generateAddress'>
+                <p>You can generate addresses for up to five currencies. Generated addresses are personal and can be used for multiple transactions.</p>
+                <?php echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard'],'class' => 'c-form','id' => 'm-form')); ?>
+                <p class='c-form__row'>
+                    <label for='currency' class='c-form__label'>Select currency to pay with</label>
+                    <select required id='currency' class='c-form__field' name="data[Wallet][currency]">
+                        <option value='BTC'>Bitcoin</option>
+                        <option value='ETH'>Ethereum</option>
+                        <option value='LTC'>Litecoin</option>
+                        <option value='BCH'>Bitcoin Cash</option>
+                        <option value='DOGE'>Doge</option>
+                    </select>
+                </p>
+                <p class='c-form__row'>
+                    <button type='submit'>Generate address</button>
+                </p>
+                <?php echo $this->form->end(); ?>
+            </div>
+            <h2>Send funds</h2>
+            <p>Congratulations. You can now safely send funds to one of the generated addresses below. These addresses are
+            <em>personal</em>. You can use an address for multiple transactions. Make sure that the currency you send, matches
+            the one of the generated address. Failing to do so, will result in the loss of your funds!</p>
+            <?php if(!empty($wallets)){ ?>
             <ul class='c-addresses u-flatList'>
                 <?php foreach($wallets as $wallet){ ?>
                 <li class='c-addresses__address c-addresses__address--<?php echo strtolower($wallet['Wallet']['currency']); ?>'>
@@ -89,39 +116,17 @@
                             }
                         ?></code></span>
                     </p>
-                    
                 </li>
                 <?php }; ?>
             </ul>
             <?php }; ?>
-            <h3>Generate a personal payment address</h3>
-            
-           <?php echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard'],'class' => 'c-form','id' => 'm-form')); ?>
-                     
-                <p class='c-form__row'>
-                    <label for='currency' class='c-form__label'>Select currency to pay with</label>
-                    <select required id='currency' class='c-form__field' name="data[Wallet][currency]">
-                        <option value='BTC'>Bitcoin</option>
-                        <option value='ETH'>Ethereum</option>
-                        <option value='LTC'>Litecoin</option>
-                        <option value='BCH'>Bitcoin Cash</option>
-                        <option value='DOGE'>Doge</option>
-                    </select>
-                </p>
-                <p class='c-form__row'>
-                    <label for='amount' class='c-form__label' id="labeltext">Amount</label>
-                    <span class='c-form__subtitle'>Entering an amount is optional and only used to calculate the estimate below.</span>
-                    <input id='amount' type='number' class='c-form__field' name="data[Wallet][amount]"/>
-                </p>
-                <p class='c-form__row' id="displayrecv">
-                    <span class='c-form__label'>Amount of FRG you'll receive</span>
-                    <span class='c-form__field'><code id="frgamount">... FRG</code></span>
-                </p> 
-                
-                <p class='c-form__row'>
-                    <button type='submit'>Generate address</button>
-                </p>
-             <?php echo $this->form->end(); ?>
+            <p class="c-disclaimer">Transactions less than the required minimum are considered donations.</p>
+            <h2>Get FRG</h2>
+            <p>
+                Every time you send funds to one of the above addresses, a new transaction will be generated.
+                Sent funds will be converted to FRG upon completion of the transaction. All of your transactions will
+                be visible on the transactions page.
+            </p>
         </div>
     </section>
         </div>
