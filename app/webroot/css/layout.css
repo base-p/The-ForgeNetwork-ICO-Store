@@ -78,6 +78,7 @@ body {
 }
 
 .l-row--tint {
+    color: #000 !important;
     background-color: #e6e6e6;
 }
 
