@@ -48,7 +48,10 @@
             <h2>Generate address</h2>
             <p><span id='toggleAddressGeneration' class="c-button c-button--white">Generate new address</span></p>
             <div id='generateAddress' class='c-generateAddress'>
-                <p>You can generate addresses for up to five currencies. Generated addresses are personal and can be used for multiple transactions.</p>
+                <p>
+                    You can generate addresses for up to five currencies. Generated addresses are personal and can be used for multiple transactions.
+                    Please note that generating an address can take <strong>up to one minute</strong>.
+                </p>
                 <?php echo $this->Form->create('Wallet', array('url'=>['controller'=>'users','action'=>'dashboard'],'class' => 'c-form','id' => 'm-form')); ?>
                 <p class='c-form__row'>
                     <label for='currency' class='c-form__label'>Select currency to pay with</label>
