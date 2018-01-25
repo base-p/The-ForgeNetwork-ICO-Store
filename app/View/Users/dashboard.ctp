@@ -68,11 +68,11 @@
                 </p>
                 <?php echo $this->form->end(); ?>
             </div>
+            <?php if(!empty($wallets)){ ?>
             <h2>Send funds</h2>
             <p>You can safely send funds to one of the generated addresses below. These addresses are
             <em>personal</em>. You can use an address for multiple transactions. Make sure that the currency you send, matches
             the one of the generated address. Failing to do so, will result in the loss of your funds!</p>
-            <?php if(!empty($wallets)){ ?>
             <ul class='c-addresses u-flatList'>
                 <?php foreach($wallets as $wallet){ ?>
                 <li class='c-addresses__address c-addresses__address--<?php echo strtolower($wallet['Wallet']['currency']); ?>'>
@@ -122,7 +122,6 @@
                 </li>
                 <?php }; ?>
             </ul>
-            <?php }; ?>
             <p class="c-disclaimer">Transactions less than the required minimum are considered donations.</p>
             <h2>Get FRG</h2>
             <p>
@@ -130,6 +129,7 @@
                 Sent funds will be converted to FRG upon completion of the transaction. All of your transactions will
                 be visible on the <a href='dashboard_transactions'>transactions page</a>.
             </p>
+            <?php }; ?>
         </div>
     </section>
         <section class="l-row l-row--calculator l-row--tint">
