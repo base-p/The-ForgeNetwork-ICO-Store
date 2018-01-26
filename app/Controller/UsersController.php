@@ -167,7 +167,11 @@ class UsersController extends AppController {
             $fname = $this->request->data['fname'];
             $lname = $this->request->data['lname'];
             $frg_wallet = $this->request->data['frg_wallet'];
-            
+            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $frg_wallet)) {
+            } else {
+                $this->Flash->error(__('Invalid FRG address'));
+                return $this->redirect(array('controller' => 'users', 'action' => 'dashboard_settings'));
+            }
             $db = $this->User->getDataSource();
                 $fname = $db->value($fname, 'string');
                 $lname = $db->value($lname, 'string');
@@ -474,7 +478,7 @@ class UsersController extends AppController {
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $mgClient = new Mailgun\Mailgun(MG_SECRET);
-        $domain = "ico.theforgenetwork.com";
+        $domain = "mail.theforgenetwork.com";
 
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
