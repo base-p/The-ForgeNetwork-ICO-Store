@@ -246,6 +246,8 @@ class UsersController extends AppController {
                 $messge = '<html><p>Hi,</p><p>Click <a href="'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'">here</a> to reset your password</p><p>or copy and paste the URL below into your browser window</p><p>'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'</p></html>';
                 $this->sendMail($email,$subject,$messge);
                 $this->Flash->success(__("We've sent an e-mail with instructions on how to reset your password."));
+                return $this->redirect(['controller'=>'users','action'=>'resetpassword']);
+                
             }else{
                 $this->Flash->error(__('The e-mail address you supplied is not registered.'));
             }
@@ -494,7 +496,6 @@ class UsersController extends AppController {
     } 
     
      protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name=''){ 
-        $this->autoRender = false;
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $toEmailAddress = $recipient;
@@ -514,7 +515,6 @@ class UsersController extends AppController {
             ->setBody($content, 'text/html');
 
         $result = $mailer->send($message);
-        
          
     }
     
