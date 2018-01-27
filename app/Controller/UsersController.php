@@ -243,8 +243,15 @@ class UsersController extends AppController {
                         array('User.id' => $user_id)
                     );
                 $subject = "Reset Password";
-                $messge = '<html><p>Hi,</p><p>Click <a href="'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'">here</a> to reset your password</p><p>or copy and paste the URL below into your browser window</p><p>'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'</p></html>';
-                $this->sendMail($email,$subject,$messge);
+                $basePath = SITEPATH;
+                $message = <<<HTML
+<p>Hi,</p>
+<p>Click <a href='{$basePath}users/new_password/{$user_id}/{$resetkey}'>here</a> to reset your password.</p>
+<p>Or copy and paste the URL below into your browser window.</p>
+<p>{$basePath}users/new_password/{$user_id}/{$resetkey}</p>
+HTML;
+
+                $this->sendMail($email, $subject, $message);
                 $this->Flash->success(__("We've sent an e-mail with instructions on how to reset your password. Be sure to check spam/junk folder if our e-mail is not  in inbox!"));
                 return $this->redirect(['controller'=>'users','action'=>'resetpassword']);
                 
@@ -325,15 +332,20 @@ class UsersController extends AppController {
             }
             
             if ($this->User->save($this->request->data['User'])) {
-                 
-                    $ref_id=$this->request->data['User']['ref_id'];
+                $ref_id=$this->request->data['User']['ref_id'];
                 $email=$this->request->data['User']['username'];
                 $fname=$this->request->data['User']['first_name'];
-                $message= '<html><p>Hi '.$fname.'</p> <p>Click <a href="'.SITEPATH.'users/confirm_email/'.$ref_id.'">here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p> <p>https://shop.theforgenetwork.com/users/confirm_email/'.$ref_id.'</p></html>';
+                $basePath = SITEPATH;
+                $message = <<<HTML
+<p>Hi {$fname}.</p>
+<p>Click <a href='{$basePath}users/confirm_email/{$ref_id}'>here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p>
+<p>https://shop.theforgenetwork.com/users/confirm_email/{$ref_id}</p>
+HTML;
+
                 $subject='Email verification';
                 $this->sendMail($email,$subject,$message,$fname);
-                     $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions. Be sure to check spam/junk folder if our e-mail is not  in inbox!'));
-                    return $this->redirect(array('controller'=>'users','action' => 'register'));
+                $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions. Be sure to check spam/junk folder if our e-mail is not  in inbox!'));
+                return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
         $this->Flash->error(__('The user could not be saved. Please, try again. If the problem persists, please contact an FRG team member.'));
         
@@ -499,7 +511,7 @@ class UsersController extends AppController {
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $toEmailAddress = $recipient;
-        $content =$message;
+        $content = $message;
 
         $transporter = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
         $transporter
@@ -510,11 +522,11 @@ class UsersController extends AppController {
 
         $message = new Swift_Message($subject);
         $message
-            ->setFrom([G_UN=> 'Forge Network'])
+            ->setFrom(G_UN)
             ->setTo($toEmailAddress)
             ->setBody($content, 'text/html');
 
-        $result = $mailer->send($message);
+        $mailer->send($message);
          
     }
     
