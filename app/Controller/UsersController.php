@@ -245,7 +245,7 @@ class UsersController extends AppController {
                 $subject = "Reset Password";
                 $messge = '<html><p>Hi,</p><p>Click <a href="'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'">here</a> to reset your password</p><p>or copy and paste the URL below into your browser window</p><p>'.SITEPATH.'users/new_password/'.$user_id.'/'.$resetkey.'</p></html>';
                 $this->sendMail($email,$subject,$messge);
-                $this->Flash->success(__("We've sent an e-mail with instructions on how to reset your password."));
+                $this->Flash->success(__("We've sent an e-mail with instructions on how to reset your password. Be sure to check spam/junk folder if our e-mail is not  in inbox!"));
                 return $this->redirect(['controller'=>'users','action'=>'resetpassword']);
                 
             }else{
@@ -332,7 +332,7 @@ class UsersController extends AppController {
                 $message= '<html><p>Hi '.$fname.'</p> <p>Click <a href="'.SITEPATH.'users/confirm_email/'.$ref_id.'">here</a> to verify your E-mail or copy and paste the URL below into your browser to confirm your E-mail</p> <p>https://shop.theforgenetwork.com/users/confirm_email/'.$ref_id.'</p></html>';
                 $subject='Email verification';
                 $this->sendMail($email,$subject,$message,$fname);
-                     $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions.'));
+                     $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions. Be sure to check spam/junk folder if our e-mail is not  in inbox!'));
                     return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
         $this->Flash->error(__('The user could not be saved. Please, try again. If the problem persists, please contact an FRG team member.'));
