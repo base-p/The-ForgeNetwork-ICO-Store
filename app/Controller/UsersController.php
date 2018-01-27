@@ -522,7 +522,7 @@ HTML;
 
         $message = new Swift_Message($subject);
         $message
-            ->setFrom(G_UN)
+            ->setFrom([G_UN => 'ForgeNet Support'])
             ->setTo($toEmailAddress)
             ->setBody($content, 'text/html');
 
