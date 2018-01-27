@@ -20,6 +20,7 @@
 App::uses('CakeTime', 'Utility');
 App::uses('AppController', 'Controller');
 
+
 /**
  * Static content controller
  *
@@ -474,7 +475,7 @@ class UsersController extends AppController {
         return false;
     }
 } 
-    protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name=''){ 
+    protected function sendjjj($recipient=NULL,$subject=NULL,$message=NULL,$name=''){ 
         require APP . 'Vendor' . DS. 'autoload.php';
         
         $mgClient = new Mailgun\Mailgun(MG_SECRET);
@@ -482,14 +483,39 @@ class UsersController extends AppController {
 
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
-            'from'    => 'ForgeNetwork <shop@mail.theforgenetwork.com>',
+            'from'    => 'ForgeNetwork <shop@theforgenetwork.com>',
             'to'      => $name.' <'.$recipient.'>',
             'h:reply-to' => 'ForgeNetwork Support <support@theforgenetwork.com>',
             'subject' => $subject,
-            'html'    => $message
+            'text'    => $message
         ));
         return $result;
     
+    } 
+    
+     protected function sendMail($recipient=NULL,$subject=NULL,$message=NULL,$name=''){ 
+        $this->autoRender = false;
+        require APP . 'Vendor' . DS. 'autoload.php';
+        
+        $toEmailAddress = $recipient;
+        $content =$message;
+
+        $transporter = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
+        $transporter
+            ->setUsername(G_UN)
+            ->setPassword(G_PWD);
+
+        $mailer = new Swift_Mailer($transporter);
+
+        $message = new Swift_Message($subject);
+        $message
+            ->setFrom([G_UN=> 'Forge Network'])
+            ->setTo($toEmailAddress)
+            ->setBody($content, 'text/html');
+
+        $result = $mailer->send($message);
+        
+         
     }
     
     public function get_rates(){
