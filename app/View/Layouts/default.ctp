@@ -6,7 +6,7 @@
         <title>ForgeNet ICO Shop</title>
         <meta name='description' content=''>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='shortcut icon' type='image/png' href='img/favicon.png'/>
+        <link rel='shortcut icon' type='image/png' href='/img/favicon.png'/>
         <?php echo $this->Html->css('normalize'); ?>
         <?php echo $this->Html->css('main'); ?>
         <?php echo $this->Html->css('layout'); ?>
@@ -18,6 +18,11 @@
             echo $this->fetch('css');
             echo $this->fetch('script');
 	    ?>
+        <meta property="og:title" content="Title Here" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="http://www.example.com/" />
+        <meta property="og:image" content="http://example.com/image.jpg" />
+        <meta property="og:description" content="Description Here" /> 
     </head>
 
   

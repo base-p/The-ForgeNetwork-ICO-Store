@@ -56,7 +56,36 @@
             </table>
             <?php }else {?>
                 <p>
-                   No activity recorded yet.
+                   No Transactions recorded yet.
+                </p>
+            <?php }?>
+            <hr>
+            <?php if(!empty($refs)){ ?>
+            <table>
+                <caption>You've earned <code><?php echo $refearn; ?> FRG</code> in total via referral.</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Referred</th>
+                        <th>Earned(FRG)</th>
+        
+                    </tr>
+                </thead>
+                <tbody>
+                     <?php foreach($refs as $ref) {?>
+                    <tr>
+                        <td><?php echo $ref['Refearning']['id']; ?></td>
+                        <td><?php echo $ref['Refearning']['created']; ?></td>
+                        <td><?php echo $ref['Refearning']['referee']; ?></td>
+                        <td><?php echo $ref['Refearning']['earning']; ?></td>
+                    </tr>
+                     <?php }?>
+                </tbody>
+            </table>
+            <?php }else {?>
+                <p>
+                   No Referral activity recorded yet.
                 </p>
             <?php }?>
         </div>

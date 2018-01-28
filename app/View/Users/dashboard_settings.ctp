@@ -42,6 +42,10 @@
                     <span class='c-form__field'><?php echo htmlspecialchars($email, ENT_QUOTES);?></span>
                 </p>
                 <p class='c-form__row'>
+                    <span class='c-form__label'>Referral Link</span>
+                    <span class='c-form__field'><code>https://shop.theforgenetwork.com/register/ref/<?=$ref_id?></code></span>
+                </p>
+                <p class='c-form__row'>
                     <label for='firstName' class='c-form__label'>First name</label>
                     <input required id='firstName' type='text' class='c-form__field' name="data[fname]" value='<?php echo htmlspecialchars($fname, ENT_QUOTES);?>' />
                 </p>

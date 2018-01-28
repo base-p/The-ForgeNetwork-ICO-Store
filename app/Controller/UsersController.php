@@ -36,7 +36,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $uses = array('User','Feed','Wallet','Transaction','Val');
+	public $uses = array('User','Feed','Wallet','Transaction','Val','Refearning');
 
 /**
  * Displays a view
@@ -149,8 +149,18 @@ class UsersController extends AppController {
         }
         
         }
+        $refs = $this->Refearning->find('all',array('conditions'=>array('Refearning.user_id'=>$user_id)));
+        if(!empty($refs)){
+            $refearn=0;
+            foreach ($refs as $rkey=>$ref){
+                $refearn += $ref['Refearning']['earning'];
+                $rctime=new DateTime($refs[$rkey]['Refearning']['created']);
+                $refs[$rkey]['Refearning']['created'] = $rctime->format("Y-m-d");
+
+            }
+        }
         
-        $this->set(compact('txns','earned','fname'));
+        $this->set(compact('txns','earned','fname','refs','refearn'));
         
 	}
     
@@ -161,8 +171,9 @@ class UsersController extends AppController {
         $lname = $userDetails['User']['last_name'];
         $email  = $userDetails['User']['username'];
         $frg_wallet  = $userDetails['User']['frg_wallet'];
+        $ref_id = $userDetails['User']['ref_id'];
           
-        $this->set(compact('fname','lname','email','frg_wallet'));
+        $this->set(compact('fname','lname','email','frg_wallet','ref_id'));
         
         if($this->request->is('post') && !empty($this->request->data)){
             $fname = $this->request->data['fname'];
@@ -230,6 +241,10 @@ class UsersController extends AppController {
 
         
         if ($this->request->is('post') && !empty($this->request->data)) {
+            if(!empty($_POST['g-recaptcha-response'])){
+            $captcha = $this->recaptcha($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+            }else{$captcha=false;}
+            if($captcha){
             $email=$this->request->data['email'];
             $userDetails = $this->User->find('first',array('conditions'=>array('User.username'=>$email)));
             if(!empty($userDetails)){
@@ -258,7 +273,10 @@ HTML;
             }else{
                 $this->Flash->error(__('The e-mail address you supplied is not registered.'));
             }
-        }
+        }else{
+                $this->Flash->error('We could not verify that you are human.');
+                return $this->redirect(['controller'=>'users','action'=>'resetpassword']);
+            } }
         
         $this->set(compact('days','result'));
 	}
@@ -299,10 +317,14 @@ HTML;
         }
 	
     
-    public function register() {
+    public function register($referrer=NULL) {
         if(!empty($this->Auth->User('id'))){
        return $this->redirect(['controller'=>'users','action'=>'dashboard']);
    }
+        if(isset($referrer)){
+            $this->Session->write('referrer',$referrer);
+        }
+        $this->set(compact('referrer'));
 		 if ($this->request->is('post') && !empty($this->request->data)) {
             if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['User']['frg_wallet'])) {
             } else {
@@ -328,7 +350,9 @@ HTML;
             $this->request->data['User']['ref_id'] = genpwd();
             if($this->Session->check('referrer')){
                 $referrer = $this->User->findByRef_id($this->Session->read('referrer'));
-                $this->request->data['User']['referrer']=$referrer['User']['id'];
+                if(!empty($referrer)){
+                    $this->request->data['User']['referrer']=$referrer['User']['id'];
+                }
             }
             
             if ($this->User->save($this->request->data['User'])) {
@@ -751,6 +775,24 @@ HTML;
                 
                 $txn_array['frg_amount'] = round($amount*$cryptrate/$ourrate['Feed']['feed'], 2);
                 $txn_array['conversion_rate'] = $cryptrate;
+                $refdets = $this->Refearning->find('first',['conditions'=>['Refearning.transaction_id'=>$txn_id]]);
+                if(empty($refdets)){
+                    $user_id = $wallet['Wallet']['user_id'];
+                    $referee = $this->User->find('first',['conditions'=>['User.id'=>$user_id]]);
+                    $referrer_id = $referee['User']['referrer'];
+                    $refident = $referee['User']['username'];
+                    if(isset($referrer_id)){
+                        $refearn = 0.14*$frg_amount;
+                        $refearn= round($refearn,2);
+                        $ref_array=[
+                            "user_id"=>$referrer_id,
+                            "earning"=>$refearn,
+                            "referee"=>$refident,
+                            "transaction_id"=>$txn_id
+                        ];
+                        $this->Refearning->save($ref_array);
+                    }   
+                }
                 
             }
             if($this->Transaction->save($txn_array)){
@@ -781,6 +823,24 @@ HTML;
                         array('Transaction.status' => $status,'Transaction.confirms' => $confirms,'Transaction.conversion_rate'=>$conversion_rate,'Transaction.frg_amount'=>$frg_amount),
                         array('Transaction.id' => $transaction_id)
                     );
+                    $refdets = $this->Refearning->find('first',['conditions'=>['Refearning.transaction_id'=>$txn_id]]);
+                    if(empty($refdets)){
+                        $user_id = $wallet['Wallet']['user_id'];
+                        $referee = $this->User->find('first',['conditions'=>['User.id'=>$user_id]]);
+                        $referrer_id = $referee['User']['referrer'];
+                        $refident = $referee['User']['username'];
+                        if(isset($referrer_id)){
+                            $refearn = 0.14*$frg_amount;
+                            $refearn= round($refearn,2);
+                            $ref_array=[
+                                "user_id"=>$referrer_id,
+                                "earning"=>$refearn,
+                                "referee"=>$refident,
+                                "transaction_id"=>$txn_id
+                            ];
+                            $this->Refearning->save($ref_array);
+                        }   
+                    }
 
                 }else{
                 

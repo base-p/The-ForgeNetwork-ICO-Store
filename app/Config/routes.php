@@ -38,6 +38,7 @@
 	Router::connect('/get_rates', array('controller' => 'users', 'action' => 'get_rates'));
 	Router::connect('/total_amount', array('controller' => 'users', 'action' => 'total_amount'));
 	Router::connect('/get_usdrate', array('controller' => 'users', 'action' => 'get_usdrate'));
+    Router::connect('/register/ref/**', array('controller' => 'users', 'action' => 'register'));
 	
 	//Router::connect('/generate_address/**', array('controller' => 'users', 'action' => 'generate_address'));
 /**
