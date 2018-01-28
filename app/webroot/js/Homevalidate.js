@@ -4,12 +4,10 @@ $(document).ready(function(){
        errorElement: "div",
        rules: {
            "data[User][first_name]": {
-		          required: true,
-		          lettersonly: true
+		          required: true
             },
            "data[User][last_name]": {
-		          required: true,
-		          lettersonly: true
+		          required: true
             },
            "data[User][password]": {
 		      required: true,
@@ -30,12 +28,10 @@ $(document).ready(function(){
         },
         messages: {
             "data[User][first_name]": {
-		          required: "Enter First Name!",
-		          lettersonly: "Letters only!"
+		          required: "Enter First Name!"
             },
            "data[User][last_name]": {
-		          required: "Enter First Name!",
-		          lettersonly: "Letters only!"
+		          required: "Enter First Name!"
             },
            "data[User][password]": {
 		      required: "Enter Password!",
