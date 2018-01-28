@@ -63,7 +63,7 @@
                         to help you out. You'll be up and running in notime.
                     </p>
                     <p>
-                        Already have an account? You can <a href='login'>login</a> here.
+                        Already have an account? You can <a href='/login'>login</a> here.
                     </p>
                 </div>
             </div>

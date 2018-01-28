@@ -352,6 +352,10 @@ HTML;
                 $referrer = $this->User->findByRef_id($this->Session->read('referrer'));
                 if(!empty($referrer)){
                     $this->request->data['User']['referrer']=$referrer['User']['id'];
+                }else{
+                    $this->Session->delete('referrer');
+                    $this->Flash->error(__('Invalid referral link! Use https://shop.theforgenetwork.com/register to register or obtain correct referral link from your referrer'));
+                    return $this->redirect(array('controller'=>'users','action' => 'register'));
                 }
             }
             

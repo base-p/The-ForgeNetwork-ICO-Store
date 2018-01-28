@@ -19,10 +19,9 @@
             echo $this->fetch('script');
 	    ?>
         <meta property="og:title" content="ForgeNet Pre-ICO at 50% discount" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://shop.theforgenetwork.com" />
+        <meta property="og:type" content="website" />
         <meta property="og:image" content="https://shop.theforgenetwork.com/img/ogimage.jpg" />
-        <meta property="og:description" content="Participate in The Forge Network's Pre-ICO sales and receive a whooping 50% discount on all purchases, with 14% bonus on referrals' purchases" /> 
+        <meta property="og:description" content="Participate in The Forge Network's Pre-ICO sales and receive a whooping 50% discount on all purchases, with 14% bonus on referrals' purchases." /> 
     </head>
 
   
