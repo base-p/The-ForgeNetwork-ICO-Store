@@ -55,7 +55,7 @@
                 </p>
                 <p class='c-form__row'>
                     <label for='frg' class='c-form__label'>FRG address</label>
-                    <input required id='frg' type='text' class='c-form__field' name="data[frg_wallet]" value="<?php echo htmlspecialchars($frg_wallet, ENT_QUOTES);?>"/>
+                    <input id='frg' type='text' class='c-form__field' name="data[frg_wallet]" value="<?php echo htmlspecialchars($frg_wallet, ENT_QUOTES);?>"/>
                 </p>
                 <p class='c-form__row'>
                     <button type='submit'>Update</button>

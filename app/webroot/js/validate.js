@@ -14,7 +14,7 @@ $(document).ready(function(){
 		          lettersonly: true
             },
            "data[frg_wallet]": {
-		          required: true,
+		           minlength: 34
 		          //lettersonly: true
             }
         },
@@ -28,7 +28,7 @@ $(document).ready(function(){
 		          lettersonly: "Not a valid name!"
             }, 
             "data[frg_wallet]": {
-		          required: "Wallet address is required for payout!",
+		          minlength: "Enter a valid wallet address!",
 		          //lettersonly: "Enter a valid amount!"
             }
         }
