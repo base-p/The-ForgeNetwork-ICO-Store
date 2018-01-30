@@ -184,7 +184,7 @@ class UsersController extends AppController {
             if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['frg_wallet'])) {
             } else {
                 $this->Flash->error(__('Invalid FRG address'));
-                return $this->redirect(array('controller'=>'users','action' => 'register'));
+                return $this->redirect(array('controller'=>'users','action' => 'dashboard_settings'));
             }}else{
                  $frg_wallet=NULL;
              }
