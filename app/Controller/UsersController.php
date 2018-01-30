@@ -378,7 +378,7 @@ HTML;
 HTML;
 
                 $subject='Email verification';
-                //$this->sendMail($email,$subject,$message,$fname);
+                $this->sendMail($email,$subject,$message,$fname);
                 $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions. Be sure to check spam/junk folder if our e-mail is not  in inbox!'));
                 return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
