@@ -491,7 +491,26 @@
     padding: 2em 2em 1em;
     display: none;
 }
+.c-refDisplay {
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    margin: 0 auto 1.6em;
+    padding: 2em 2em 1em;
+    display: block;
+}
 
 .c-generateAddress--active {
     display: block;
+}
+.reflinkdisp{
+    font-size:14px; 
+}
+@media (max-width: 340px) {
+    .reflinkdisp{
+        position:absolute; 
+        left:2px;
+    }
+    .reflinkpdisp{
+        margin-top: 85px;
+    }
 }

@@ -33,6 +33,7 @@
             <a href='logout'>Logout</a>
         </li>
     </ul>
+            
             <ol class="u-flatList c-purchaseSteps">
                 <li class='c-purchaseSteps__step'>
                     <span class='c-purchaseSteps__count'>1</span> Generate address
@@ -68,6 +69,12 @@
                 </p>
                 <?php echo $this->form->end(); ?>
             </div>
+            <div class='c-refDisplay'>
+                <p>Here is your referral link:</p>
+                <p><code class="reflinkdisp">https://shop.theforgenetwork.com/register/ref/<?=$ref_id;?></code></p>
+                <p class="reflinkpdisp">Use it to invite your friends to purchase FRG and you earn a 14% bonus on their deposits. Feel free to share it on social media too!</p>        
+            </div>
+            
             <?php if(!empty($wallets)){ ?>
             <h2>Send funds</h2>
             <p>You can safely send funds to one of the generated addresses below. These addresses are
@@ -102,19 +109,19 @@
                         <span>Minimal transaction: <code><?php 
                             switch ($wallet['Wallet']['currency']) {
                             case 'ETH':
-                                echo '0.178 ETH';
+                                echo '0.044 ETH';
                                 break;
                             case 'BTC':
-                                echo '0.016 BTC';
+                                echo '0.004 BTC';
                                 break;
                             case 'LTC':
-                                echo '1 LTC';
+                                echo '0.25 LTC';
                                 break;
                             case 'BCH':
-                                echo '0.11 BCH';
+                                echo '0.025 BCH';
                                 break;
                             case 'DOGE':
-                                echo '26211 DOGE';
+                                echo '6500 DOGE';
                                 break;
                             }
                         ?></code></span>
@@ -131,6 +138,7 @@
             </p>
             <?php }; ?>
         </div>
+        
     </section>
         <section class="l-row l-row--calculator l-row--tint">
             <div class="l-row__inner">

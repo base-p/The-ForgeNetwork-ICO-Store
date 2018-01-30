@@ -34,7 +34,7 @@
                         We'll be there to help you out. You'll be up and running in notime.
                     </p>
                     <p>
-                        Don't have an account yet? You can <a href='register'>register</a> here.
+                        Don't have an account yet? You can <a href='/register'>register</a> here. or <a href='/login'>login</a> here.
                     </p>
                 </div>
             </div>

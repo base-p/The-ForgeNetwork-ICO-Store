@@ -69,6 +69,7 @@ class UsersController extends AppController {
         $wallets = $this->Wallet->find('all',array('conditions'=>array('Wallet.user_id'=>$user_id)));
         $userDetails = $this->User->find('first',array('conditions'=>array('User.id'=>$user_id)));
         $fname=$userDetails['User']['first_name'];
+        $ref_id=$userDetails['User']['ref_id'];
        // $usdRate = $this->getRates();
         if($this->request->is('post') && !empty($this->request->data)){
             $amount=abs($this->request->data['Wallet']['amount']);
@@ -103,7 +104,7 @@ class UsersController extends AppController {
             }
             
         }
-        $this->set(compact('days','prices','address','currency','amount','wallets','fname'));
+        $this->set(compact('days','prices','address','currency','amount','wallets','fname','ref_id'));
 	}
     
     public function dashboard_transactions() {
@@ -128,19 +129,19 @@ class UsersController extends AppController {
             
             switch ($txn['Wallet']['currency']) {
                 case 'ETH':
-                    $min=0.165;
+                    $min=0.04;
                     break;
                 case 'BTC':
-                    $min=0.015;
+                    $min=0.0035;
                     break;
                 case 'LTC':
-                    $min=0.9;
+                    $min=0.23;
                     break;
                 case 'BCH':
-                    $min=0.1;
+                    $min=0.023;
                     break;
                 case 'DOGE':
-                    $min=26000;
+                    $min=6200;
                     break;
             }
             if($txn['Transaction']['amount']<$min){
@@ -179,11 +180,14 @@ class UsersController extends AppController {
             $fname = $this->request->data['fname'];
             $lname = $this->request->data['lname'];
             $frg_wallet = $this->request->data['frg_wallet'];
-            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $frg_wallet)) {
+            if(!empty($this->request->data['User']['frg_wallet'])){
+            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['User']['frg_wallet'])) {
             } else {
                 $this->Flash->error(__('Invalid FRG address'));
-                return $this->redirect(array('controller' => 'users', 'action' => 'dashboard_settings'));
-            }
+                return $this->redirect(array('controller'=>'users','action' => 'register'));
+            }}else{
+                 $this->request->data['User']['frg_wallet']=NULL;
+             }
             $db = $this->User->getDataSource();
                 $fname = $db->value($fname, 'string');
                 $lname = $db->value($lname, 'string');
@@ -326,11 +330,14 @@ HTML;
         }
         $this->set(compact('referrer'));
 		 if ($this->request->is('post') && !empty($this->request->data)) {
+             if(!empty($this->request->data['User']['frg_wallet'])){
             if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['User']['frg_wallet'])) {
             } else {
                 $this->Flash->error(__('Invalid FRG address'));
                 return $this->redirect(array('controller'=>'users','action' => 'register'));
-            }
+            }}else{
+                 $this->request->data['User']['frg_wallet']=NULL;
+             }
              $exUser=$this->User->find('first',array('conditions'=>array('User.username'=>$this->request->data['User']['username'])));
              if(!empty($exUser)){
                  $this->Flash->error(__('Email is taken!'));
@@ -371,7 +378,7 @@ HTML;
 HTML;
 
                 $subject='Email verification';
-                $this->sendMail($email,$subject,$message,$fname);
+                //$this->sendMail($email,$subject,$message,$fname);
                 $this->Flash->success(__('Registration was successful. You need to confirm your e-mail to proceed. Please check your e-mail for further instructions. Be sure to check spam/junk folder if our e-mail is not  in inbox!'));
                 return $this->redirect(array('controller'=>'users','action' => 'register'));
             }
@@ -902,6 +909,7 @@ HTML;
                 }
             }
             $sum = round($sum);
+            $sum = $sum + WHALE_MONEY;
             $this->Val->updateAll(
                         array('Val.val' => $sum),
                         array('Val.title' => 'total')

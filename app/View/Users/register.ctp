@@ -35,10 +35,10 @@
                             <span class='c-form__subtitle'>
                                 Please provide your FRG wallet address. Coins will be sent to this address after
                                 purchasing them. Don't have an address yet? You can download
-                                <a href='https://theforgenetwork.com/wallets'>the wallet here</a>.
+                                <a href='https://theforgenetwork.com/wallets'>the wallet here</a> or supply it later from your dashboard.
                             </span>
-                            <label for='frg' class='c-form__label'>FRG address</label>
-                            <input required id='frg' type='text' class='c-form__field' name="data[User][frg_wallet]"/>
+                            <label for='frg' class='c-form__label'>FRG address(optional)</label>
+                            <input id='frg' type='text' class='c-form__field' name="data[User][frg_wallet]"/>
                         </p>
                         <p class='c-form__row'>
                             <label for='password' class='c-form__label'>Password</label>

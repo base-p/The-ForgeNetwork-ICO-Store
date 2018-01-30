@@ -23,7 +23,7 @@ $(document).ready(function(){
                 equalTo: "#password"
             },
            "data[User][frg_wallet]": {
-               required: true
+               minlength: 34
             }
         },
         messages: {
@@ -47,7 +47,7 @@ $(document).ready(function(){
                 equalTo: "Wrong confirmation"
             },
             "data[User][frg_wallet]": {
-               required: "Enter Wallet Address!"
+               minlength: "Enter Valid Wallet Address!"
             }
         },
         submitHandler: function() {
