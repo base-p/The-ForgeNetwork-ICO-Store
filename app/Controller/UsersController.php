@@ -180,13 +180,13 @@ class UsersController extends AppController {
             $fname = $this->request->data['fname'];
             $lname = $this->request->data['lname'];
             $frg_wallet = $this->request->data['frg_wallet'];
-            if(!empty($this->request->data['User']['frg_wallet'])){
-            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['User']['frg_wallet'])) {
+            if(!empty($this->request->data['frg_wallet'])){
+            if (preg_match("/^F[0-9a-zA-Z]{33}$/", $this->request->data['frg_wallet'])) {
             } else {
                 $this->Flash->error(__('Invalid FRG address'));
                 return $this->redirect(array('controller'=>'users','action' => 'register'));
             }}else{
-                 $this->request->data['User']['frg_wallet']=NULL;
+                 $frg_wallet=NULL;
              }
             $db = $this->User->getDataSource();
                 $fname = $db->value($fname, 'string');
