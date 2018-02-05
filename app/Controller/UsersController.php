@@ -55,6 +55,7 @@ class UsersController extends AppController {
     
     
     public function dashboard() {
+		return $this->redirect(array('controller'=>'users','action' => 'dashboard_transactions'));
 		$user_id = $this->Auth->User('id');
         $prices=[];
         $feeds=$this->Feed->find('all');

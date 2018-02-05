@@ -68,8 +68,8 @@
     <section class='l-row l-row--fire l-row--countdown'>
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
-    Presale ends in
-    </h2>            <div class='c-countDown'>
+    Presale has ended. You can still login to view your transactions, or register in Advance for ICO mainsale
+    </h2>            <div class='c-countDown' style='display: none'>
     <ul class='u-flatList c-countDown__list'>
         <li>
             <span class='c-countDown__value c-countDown__days'></span>
@@ -93,7 +93,7 @@
     <section class='l-row'>
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
-    Join the presale
+    Presale has ended!
     </h2>            <p class='c-pageIntroduction'>So far, <code>$<?php echo $total; ?></code> has been purchased</p>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
                     <p>
