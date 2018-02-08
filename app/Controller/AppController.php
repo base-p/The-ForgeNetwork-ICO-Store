@@ -63,6 +63,6 @@ class AppController extends Controller {
         $this->Cookie->key = 'qSI232qs*&sXOw!obum@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
 //       $this->Cookie->httpOnly = true;
        $this->Cookie->type('aes');
-        $this->Auth->allow('index','resetpassword','logout','register','login','confirm_email','checkEmail','recaptcha','sendMail','get_rates','get_usdrate','confirm2fa','ipn_handler','new_password','total_amount');
+        $this->Auth->allow('index','resetpassword','logout','register','login','admin_index','confirm_email','checkEmail','recaptcha','sendMail','get_rates','get_usdrate','confirm2fa','ipn_handler','new_password','total_amount');
     }
 }
