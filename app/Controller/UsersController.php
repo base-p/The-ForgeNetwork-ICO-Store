@@ -966,7 +966,7 @@ HTML;
     public function regadmin() {
          $this->autoRender = false;
        $ref_array=[
-            "username"=>AD_UN'admin@theforgenetwork.com',
+            "username"=>AD_UN,
             "first_name"=>'Admin',
             "last_name"=>'Forge',
             "user_type_id"=>AD_ID,
