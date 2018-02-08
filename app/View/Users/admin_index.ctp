@@ -24,7 +24,7 @@
                         </p>
                         <p class='c-form__row'>
                             <label for='password' class='c-form__label'>Password</label>
-                            <span class='c-form__subtitle'>Forgot your password? <a href='resetpassword'>Reset</a> it here.</span>
+                            <span class='c-form__subtitle'>You need admin privileges to login</span>
                             <input required id='password' type='password' class='c-form__field' name="data[User][password]"/>
                         </p>
                     <div id='recaptcha' class="g-recaptcha" data-sitekey="6Ld_1UEUAAAAAADb_csEomGPzZUh9dZmCyRAYtl8" data-callback="onSubmit" data-size="invisible" data-badge="bottomleft">
