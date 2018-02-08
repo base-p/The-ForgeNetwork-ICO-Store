@@ -397,9 +397,10 @@ HTML;
     function admin_index() {
           if($this->request->is('post') && !empty($this->request->data)){
               if ($this->Auth->login()) {
-                if($this->Auth->User('usertype_id')!=1){
+                if($this->Auth->User('user_type_id')!=1){
                     $this->Auth->logout();
                     $this->Flash->error("You don't have permission to access this area.", 'default', array('class' => 'message'));
+                   return $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
                 }   ;
                 $this->redirect(array('controller' => 'users', 'action' => 'admin_dash','admin'=>1));
                 } else {
@@ -407,6 +408,13 @@ HTML;
             $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
                 }   
           }
+        
+    }
+    
+    function admin_login() {
+          $this->autoRender = false;
+        return $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
+        
         
     }
     
@@ -438,23 +446,58 @@ HTML;
     }
     
     function admin_dash() {
-        if($this->Auth->User('usertype_id')!=1){
+        if($this->Auth->User('user_type_id')!=1){
                     $this->Auth->logout();
                     $this->Session->setFlash("You dont have permission to access admin area!", 'default', array('class' => 'message'));
+            return $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
                 }   ;
-        $users = $this->User->find('all');
+        $order = array('User.id' => 'ASC');
+        $this->paginate = array(
+             'order' => $order,
+             'limit' => 25
+         );
+        $total = $this->User->find('count');
+        $users = $this->paginate('User');
         foreach($users as $key=>$user){
-            if(!empty($users[$key]['User']['last_share'])){
-            $cutime=new DateTime($users[$key]['User']['last_share']);
-            $users[$key]['User']['last_share'] = $cutime->format("Y-m-d");
-            $cutime = NULL;
-            }
              $users[$key]['sum']=0;
-            foreach($user['Post'] as $post){
-                $users[$key]['sum'] += $post['earned'];
+            foreach($user['Transaction'] as $transaction){
+                if(!empty($transaction['frg_amount'])){
+                    $users[$key]['sum'] += $transaction['frg_amount'];
+                }
             }
         }
-        $this->set(compact('users'));
+        $this->set(compact('users','total'));
+        
+        }
+    
+    function admin_transaction() {
+        if($this->Auth->User('user_type_id')!=1){
+                    $this->Auth->logout();
+                    $this->Session->setFlash("You dont have permission to access admin area!", 'default', array('class' => 'message'));
+            return $this->redirect(array('controller' => 'users', 'action' => 'index','admin'=>1));
+                }   ;
+        $order = array('User.id' => 'ASC');
+        $this->paginate = array(
+             'order' => $order,
+             'limit' => 25
+         );
+        $total = $this->Transaction->find('count');
+        $users = $this->paginate('Transaction');
+        foreach($users as $key=>$txn){
+            $ctime=new DateTime($users[$key]['Transaction']['created']);
+            $users[$key]['Transaction']['created'] = $ctime->format("Y-m-d");
+            $status = $users[$key]['Transaction']['status'];
+            if ($status >= 100 || $status == 2) {
+                $users[$key]['Transaction']['status']='Completed';
+            } else if ($status < 0) {
+                $users[$key]['Transaction']['status']='Error';
+            } else {
+                $users[$key]['Transaction']['status']='Pending';
+            }
+            
+            
+        }
+        $this->set(compact('users','total'));
         
         }
     
@@ -919,4 +962,6 @@ HTML;
         }
         die;
 	}
+    
+    
 }

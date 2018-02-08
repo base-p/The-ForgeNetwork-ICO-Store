@@ -5,8 +5,8 @@ class User extends AppModel {
      var $name = 'User';
     
     public $hasMany = array(
-         'Wallet' => array(
-            'className' => 'Wallet',
+         'Transaction' => array(
+            'className' => 'Transaction',
             'foreignKey' => 'user_id',
             ),
     );
