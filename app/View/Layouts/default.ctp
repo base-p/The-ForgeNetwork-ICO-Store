@@ -21,7 +21,7 @@
         <meta property="og:title" content="ForgeNet ICO at 25% discount" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://shop.theforgenetwork.com/img/ogimage.jpg" />
-        <meta property="og:description" content="Participate in The Forge Network's ICO main sale  and receive a 25% discount on all purchases, with 12% bonus on referrals' purchases." /> 
+        <meta property="og:description" content="Participate in The Forge Network's ICO main sale  and receive a 25% discount on all purchases, with 14% bonus on referrals' purchases." /> 
     </head>
 
   

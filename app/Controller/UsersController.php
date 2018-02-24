@@ -55,7 +55,7 @@ class UsersController extends AppController {
     
     
     public function dashboard() {
-		return $this->redirect(array('controller'=>'users','action' => 'dashboard_transactions'));
+		//return $this->redirect(array('controller'=>'users','action' => 'dashboard_transactions'));
 		$user_id = $this->Auth->User('id');
         $prices=[];
         $feeds=$this->Feed->find('all');
@@ -128,7 +128,7 @@ class UsersController extends AppController {
                 $txns[$key]['Transaction']['status']='Pending';
             }
             
-            switch ($txn['Wallet']['currency']) {
+            /*switch ($txn['Wallet']['currency']) {
                 case 'ETH':
                     $min=0.04;
                     break;
@@ -147,7 +147,7 @@ class UsersController extends AppController {
             }
             if($txn['Transaction']['amount']<$min){
                 unset($txns[$key]);
-            }
+            }*/
         }
         
         }

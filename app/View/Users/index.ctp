@@ -12,7 +12,7 @@
         <div class='c-identity'>
     <img class='c-identity__logo' src='img/logo-forge.png' alt='' width='100' height='100' />
     <h1 class='c-identity__title'>The Forge Network</h1>
-    <p class='c-identity__subtitle'>ICO (pre)sale Shop</p>
+    <p class='c-identity__subtitle'>ICO Shop</p>
 </div>    </div>
     <p class='c-mastHead__login'>
         <a class='c-button c-button--white' href='login'>
@@ -68,8 +68,8 @@
     <section class='l-row l-row--fire l-row--countdown'>
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
-    Presale has ended. You can still login to view your transactions, or register in Advance for ICO mainsale
-    </h2>            <div class='c-countDown' style='display: none'>
+    ICO ends in.
+    </h2>            <div class='c-countDown' >
     <ul class='u-flatList c-countDown__list'>
         <li>
             <span class='c-countDown__value c-countDown__days'></span>
@@ -93,7 +93,7 @@
     <section class='l-row'>
         <div class='l-row__inner'>
             <h2 class='c-sectionTitle'>
-    Presale has ended!
+    ICO mainsale has started!
     </h2>            <p class='c-pageIntroduction'>So far, <code>$<?php echo $total; ?></code> has been purchased</p>            <div class='l-cols l-cols--2'>
                 <div class='l-col'>
                     <p>
