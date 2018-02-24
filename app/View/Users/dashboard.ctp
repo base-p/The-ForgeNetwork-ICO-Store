@@ -106,30 +106,12 @@
                     </h4>
                     <p>
                         <span><code><?php echo $wallet['Wallet']['address']; ?></code></span>
-                        <span>Minimal transaction: <code><?php 
-                            switch ($wallet['Wallet']['currency']) {
-                            case 'ETH':
-                                echo '0.044 ETH';
-                                break;
-                            case 'BTC':
-                                echo '0.004 BTC';
-                                break;
-                            case 'LTC':
-                                echo '0.25 LTC';
-                                break;
-                            case 'BCH':
-                                echo '0.025 BCH';
-                                break;
-                            case 'DOGE':
-                                echo '6500 DOGE';
-                                break;
-                            }
-                        ?></code></span>
+                        
                     </p>
                 </li>
                 <?php }; ?>
             </ul>
-            <p class="c-disclaimer">Transactions less than the required minimum are considered donations.</p>
+            <p class="c-disclaimer">No minimum transaction!</p>
             <h2>Get FRG</h2>
             <p>
                 Every time you send funds to one of the above addresses, a new transaction will be generated.
